@@ -57,10 +57,6 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
     var genericOnOffRedClientModel1PublicationFinished: Bool = false
     var genericOnOffGreenClientModel1PublicationFinished: Bool = false
     var genericOnOffBlueClientModel1PublicationFinished: Bool = false
-    var LeftGroup: Group!
-    var RightGroup: Group!
-    var LeftGroupAddress: MeshAddress? = MeshAddress(0xC001)
-    var RightGroupAddress: MeshAddress? = MeshAddress(0xC002)
     
     var genericOnOffRedClientModel2: Model!
     var genericOnOffGreenClientModel2: Model!
@@ -173,7 +169,7 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
         return button
     }()
     
-    fileprivate lazy var counterAttackButton: UIButton = {
+    fileprivate lazy var groupAddSubscriptionButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .white
@@ -182,39 +178,9 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
         button.layer.shadowRadius = 20
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.setTitle("counterAttack", for: .normal)
+        button.setTitle("Group Add Subscription", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(counterAttackGroupAddSubscription), for: .touchUpInside)
-        return button
-    }()
-    
-    fileprivate lazy var diagonalButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 20
-        button.layer.shadowOpacity = 0.2
-        button.layer.shadowRadius = 20
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.setTitle("diagonal", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(diagonalGroupAddSubscription), for: .touchUpInside)
-        return button
-    }()
-    
-    fileprivate lazy var powerPlayButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 20
-        button.layer.shadowOpacity = 0.2
-        button.layer.shadowRadius = 20
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.setTitle("powerPlay", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(powerPlayGroupAddSubscription), for: .touchUpInside)
+        button.addTarget(self, action: #selector(LEDGroupAddSubscription), for: .touchUpInside)
         return button
     }()
 
@@ -229,9 +195,7 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
         view.addSubview(publishRedButton)
         view.addSubview(publishGreenButton)
         view.addSubview(publishBlueButton)
-        view.addSubview(counterAttackButton)
-        view.addSubview(diagonalButton)
-        view.addSubview(powerPlayButton)
+        view.addSubview(groupAddSubscriptionButton)
         
         setupConstraints()
         MeshNetworkManager.instance.delegate = self
@@ -253,20 +217,7 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
         } else {
             createAndSaveNewGroup(name: "LEDGroup", address: LEDGroupAddress!)
         }
-        
-        if let _ = groups.first(where: { $0.name == "LeftGroup" }) {
-            LeftGroup = groups.first(where: { $0.name == "LeftGroup" })!
-        } else {
-            createAndSaveLeftGroup(name: "LeftGroup", address: LeftGroupAddress!)
-        }
-        
-        if let _ = groups.first(where: { $0.name == "RightGroup" }) {
-            RightGroup = groups.first(where: { $0.name == "RightGroup" })!
-        } else {
-            createAndSaveRightGroup(name: "RightGroup", address: RightGroupAddress!)
-        }
     
-        
         if let provisionersNode = network.nodes.first(where: { $0.isLocalProvisioner }),
            let primaryElement = provisionersNode.elements.first(where: { $0.location == .first }),
            let _ = primaryElement.models.first(where: { $0.name == "Generic OnOff Client" })
@@ -319,26 +270,12 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
         publishBlueButton.heightAnchor.constraint(equalToConstant: view.frame.width*0.2).isActive = true
         publishBlueButton.layer.cornerRadius = view.frame.width*0.1
         
-        counterAttackButton.widthAnchor.constraint(equalToConstant: view.frame.width*0.2).isActive = true
-        counterAttackButton.heightAnchor.constraint(equalToConstant: view.frame.width*0.2).isActive = true
-        counterAttackButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width*0.15).isActive = true
-        counterAttackButton.trailingAnchor.constraint(equalTo: diagonalButton.leadingAnchor, constant: -view.frame.width*0.05).isActive = true
-        counterAttackButton.bottomAnchor.constraint(equalTo: publishBlueButton.topAnchor, constant: -150).isActive = true
-        counterAttackButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        diagonalButton.widthAnchor.constraint(equalToConstant: view.frame.width*0.2).isActive = true
-        diagonalButton.heightAnchor.constraint(equalToConstant: view.frame.width*0.2).isActive = true
-        diagonalButton.leadingAnchor.constraint(equalTo: counterAttackButton.trailingAnchor, constant: view.frame.width*0.05).isActive = true
-        diagonalButton.trailingAnchor.constraint(equalTo: powerPlayButton.leadingAnchor, constant: -view.frame.width*0.05).isActive = true
-        diagonalButton.bottomAnchor.constraint(equalTo: publishBlueButton.topAnchor, constant: -150).isActive = true
-        diagonalButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        powerPlayButton.widthAnchor.constraint(equalToConstant: view.frame.width*0.2).isActive = true
-        powerPlayButton.heightAnchor.constraint(equalToConstant: view.frame.width*0.2).isActive = true
-        powerPlayButton.leadingAnchor.constraint(equalTo: diagonalButton.trailingAnchor, constant: view.frame.width*0.05).isActive = true
-        powerPlayButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width*0.15).isActive = true
-        powerPlayButton.bottomAnchor.constraint(equalTo: publishBlueButton.topAnchor, constant: -150).isActive = true
-        powerPlayButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        groupAddSubscriptionButton.widthAnchor.constraint(equalToConstant: view.frame.width*0.3).isActive = true
+        groupAddSubscriptionButton.heightAnchor.constraint(equalToConstant: view.frame.width*0.2).isActive = true
+        groupAddSubscriptionButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        groupAddSubscriptionButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        groupAddSubscriptionButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -600).isActive = true
+        groupAddSubscriptionButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
     }
     
@@ -370,30 +307,6 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
         // Try assigning next available Group Address.
         LEDGroup = try! Group(name: name, address: address)
         try! network.add(group: LEDGroup)
-        if MeshNetworkManager.instance.save() {
-            presentAlert(title: "Group Succesfully Saved", message: "New group saved.")
-        } else {
-            presentAlert(title: "Error", message: "Mesh configuration could not be saved.")
-        }
-    }
-    
-    func createAndSaveLeftGroup(name: String, address: MeshAddress) {
-        let network = MeshNetworkManager.instance.meshNetwork!
-        // Try assigning next available Group Address.
-        LeftGroup = try! Group(name: name, address: address)
-        try! network.add(group: LeftGroup)
-        if MeshNetworkManager.instance.save() {
-            presentAlert(title: "Group Succesfully Saved", message: "New group saved.")
-        } else {
-            presentAlert(title: "Error", message: "Mesh configuration could not be saved.")
-        }
-    }
-    
-    func createAndSaveRightGroup(name: String, address: MeshAddress) {
-        let network = MeshNetworkManager.instance.meshNetwork!
-        // Try assigning next available Group Address.
-        RightGroup = try! Group(name: name, address: address)
-        try! network.add(group: RightGroup)
         if MeshNetworkManager.instance.save() {
             presentAlert(title: "Group Succesfully Saved", message: "New group saved.")
         } else {
@@ -435,81 +348,7 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
         }
     }
     
-    func addSubscriptionLeft(model: Model) {
-        let alreadySubscribedGroups = model.subscriptions
-        alreadySubscribedGroups.forEach{ group in
-            let message: ConfigMessage = ConfigModelSubscriptionDelete(group: group, from: model) ?? ConfigModelSubscriptionVirtualAddressDelete(group: group, from: model)!
-            try! MeshNetworkManager.instance.send(message, to: model)
-        }
-        start("Subscribing...") { [self] in
-            let message: ConfigMessage =
-                ConfigModelSubscriptionAdd(group: self.LeftGroup, to: model) ??
-                ConfigModelSubscriptionVirtualAddressAdd(group: self.LeftGroup, to: model)!
-            return try MeshNetworkManager.instance.send(message, to: model)
-        }
-    }
-    
-    func addSubscriptionRight(model: Model) {
-        let alreadySubscribedGroups = model.subscriptions
-        alreadySubscribedGroups.forEach{ group in
-            let message: ConfigMessage = ConfigModelSubscriptionDelete(group: group, from: model) ?? ConfigModelSubscriptionVirtualAddressDelete(group: group, from: model)!
-            try! MeshNetworkManager.instance.send(message, to: model)
-        }
-        start("Subscribing...") { [self] in
-            let message: ConfigMessage =
-                ConfigModelSubscriptionAdd(group: self.RightGroup, to: model) ??
-                ConfigModelSubscriptionVirtualAddressAdd(group: self.RightGroup, to: model)!
-            return try MeshNetworkManager.instance.send(message, to: model)
-        }
-    }
-    
-    @objc func counterAttackGroupAddSubscription() {
-        if let _ = nodes[1].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })
-           {
-            let LEDModel = nodes[1].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })!
-            addSubscription(model: LEDModel)
-        }
-        if let _ = nodes[2].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })
-           {
-            let LEDModel = nodes[2].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })!
-            addSubscription(model: LEDModel)
-        }
-        if let _ = nodes[3].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })
-           {
-            let RightModel = nodes[3].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })!
-            addSubscriptionRight(model: RightModel)
-        }
-        if let _ = nodes[4].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })
-           {
-            let RightModel = nodes[4].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })!
-            addSubscriptionRight(model: RightModel)
-        }
-    }
-    
-    @objc func diagonalGroupAddSubscription() {
-        if let _ = nodes[1].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })
-           {
-            let LEDModel = nodes[1].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })!
-            addSubscription(model: LEDModel)
-        }
-        if let _ = nodes[2].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })
-           {
-            let RightModel = nodes[2].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })!
-            addSubscriptionRight(model: RightModel)
-        }
-        if let _ = nodes[3].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })
-           {
-            let LEDModel = nodes[3].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })!
-            addSubscription(model: LEDModel)
-        }
-        if let _ = nodes[4].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })
-           {
-            let RightModel = nodes[4].elements[0].models.first(where: { $0.name == "Generic OnOff Server" })!
-            addSubscriptionRight(model: RightModel)
-        }
-    }
-    
-    @objc func powerPlayGroupAddSubscription() {
+    @objc func LEDGroupAddSubscription() {
         for node in nodes.filter({ !$0.isProvisioner }) {
             if let _ = node.elements[0].models.first(where: { $0.name == "Generic OnOff Server" })
                {
