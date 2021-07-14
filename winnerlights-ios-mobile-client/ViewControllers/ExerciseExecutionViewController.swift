@@ -59,11 +59,7 @@ struct _Job {
 
 class ExerciseExecutionViewController: ProgressViewController {
     var LEDGroup: Group!
-    var LeftGroup: Group!
-    var RightGroup: Group!
     var LEDGroupAddress: MeshAddress? = MeshAddress(0xC007)
-    var LeftGroupAddress: MeshAddress? = MeshAddress(0xC001)
-    var RightGroupAddress: MeshAddress? = MeshAddress(0xC002)
     var j: Int = 0
     var k: Int = 4
     var exercise: Exercise!
@@ -153,12 +149,7 @@ class ExerciseExecutionViewController: ProgressViewController {
     var isExerciseRunning: Bool = false
     var targetState: Bool = false
     
-    var clientModelMatrix: [Model] = []
     var clientModel: Model!
-    var _clientModel: Model!
-    var __clientModel: Model!
-    var ___clientModel: Model!
-    var ____clientModel: Model!
     var targetElmentIndex:Int = 0
     var jobs: [Job]!
     var currentJobIndex: Int!
@@ -448,11 +439,9 @@ class ExerciseExecutionViewController: ProgressViewController {
             clientModel = primaryElement.models.first(where: { $0.name == "Generic OnOff Client" })!
         }
         
-        
         defer {
             publishColorMessage(clientModel: clientModel, colorCode: 2)
         }
-        
         
         color = []
         let phase: Phase = exercise.phases[0]
