@@ -31,36 +31,32 @@
 import Foundation
 import nRFMeshProvision
 
-class GenericLevelClientDelegate: ModelDelegate {
-    var publicationMessageComposer: MessageComposer?
+struct SimpleColorSet: AcknowledgedStaticVendorMessage {
+    // The Op Code cosists of:
+    // 0xC0-0000 - Vendor Op Code bitmask
+    // 0x01-0000 - The Op Code defined by...
+    // 0x00-5900 - Nordic Semiconductor ASA company ID (in Little Endian) as defined here:
+    //             https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers/
+    static let opCode: UInt32 = 0xC15900
+    static let responseType: StaticMeshMessage.Type = SimpleOnOffStatus.self
     
-    let messageTypes: [UInt32 : MeshMessage.Type]
-    let isSubscriptionSupported: Bool = false
-    
-    init() {
-        let types: [GenericMessage.Type] = [
-            GenericLevelStatus.self
-        ]
-        messageTypes = types.toMap()
+    var parameters: Data? {
+        return Data([color])
     }
     
-    // MARK: - Message handlers
+    /// The state.
+    let color: UInt8
     
-    func model(_ model: Model, didReceiveAcknowledgedMessage request: AcknowledgedMeshMessage,
-               from source: Address, sentTo destination: MeshAddress) -> MeshMessage {
-        fatalError("Not possible")
+    init(_ color: UInt8) {
+        self.color = color
     }
     
-    func model(_ model: Model, didReceiveUnacknowledgedMessage message: MeshMessage,
-               from source: Address, sentTo destination: MeshAddress) {
-        // The status message may be received here if the Generic Level Server model
-        // has been configured to publish. Ignore this message.
-    }
-    
-    func model(_ model: Model, didReceiveResponse response: MeshMessage,
-               toAcknowledgedMessage request: AcknowledgedMeshMessage,
-               from source: Address){
-        // Ignore.
+    init?(parameters: Data) {
+        guard parameters.count == 1 else {
+            return nil
+        }
+        color = parameters[0]
     }
     
 }
+

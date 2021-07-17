@@ -6,10 +6,21 @@
 //
 
 import UIKit
+import nRFMeshProvision
+
+protocol ModelControlDelegate: AnyObject {
+    func publish(_ message: MeshMessage, description: String, fromModel model: Model)
+}
+
+protocol PublicationDelegate {
+    /// This method is called when the publication has changed.
+    func publicationChanged()
+}
 
 struct Goal {
     let position: GoalPosition
     let color: GoalColor
+    var node: Node!
 }
 enum GoalPosition {
     case upperLeft
@@ -30,8 +41,27 @@ struct Exercise {
     var description: String
     var phases: [Phase]
 }
+struct GoalNodeRelation {
+    var position: GoalPosition
+    var node: Node
+}
+struct Job {
+    var clientModel: Model
+    var address: MeshAddress
+    var targetState: Bool
+    var colorCode: UInt8
+}
+struct _Job {
+    var clientModel: Model
+    var address: MeshAddress
+    var targetState: Bool
+}
 
-class ExerciseExecutionViewController: UIViewController {
+class ExerciseExecutionViewController: ProgressViewController {
+    var LEDGroup: Group!
+    var LEDGroupAddress: MeshAddress? = MeshAddress(0xC007)
+    var j: Int = 0
+    var k: Int = 4
     var exercise: Exercise!
     let cornerRadius: CGFloat = 20
     let shadowOpacity: Float = 0.2
@@ -41,19 +71,61 @@ class ExerciseExecutionViewController: UIViewController {
     var currentPhaseIndex: Int = 0 {
         didSet {
             if currentPhaseIndex != oldValue  {
-                pitch.phase = exercise.phases[currentPhaseIndex]
+                let phase: Phase = exercise.phases[currentPhaseIndex]
+                
+                switch exercise.title {
+                case "Counter attack":
+                    switch currentPhaseIndex {
+                    case 0, 2:
+                        publishColorMessage(clientModel: clientModel, colorCode: 2)
+                    case 1, 3:
+                        publishColorMessage(clientModel: clientModel, colorCode: 3)
+                    default:
+                        break
+                    }
+                case "Diagonal":
+                    switch currentPhaseIndex {
+                    case 0:
+                        publishColorMessage(clientModel: clientModel, colorCode: 2)
+                    case 1, 3:
+                        publishColorMessage(clientModel: clientModel, colorCode: 4)
+                    case 2, 4:
+                        publishColorMessage(clientModel: clientModel, colorCode: 5)
+                    default:
+                        break
+                    }
+                case "Powerplay":
+                    switch currentPhaseIndex {
+                    case 0:
+                        publishColorMessage(clientModel: clientModel, colorCode: 2)
+                    case 1, 3:
+                        publishColorMessage(clientModel: clientModel, colorCode: 6)
+                    case 2, 4:
+                        publishColorMessage(clientModel: clientModel, colorCode: 7)
+                    default:
+                        break
+                    }
+                default:
+                    break
+                }
+                
+                j += phase.goals.count
+                k += phase.goals.count
+                pitch.phase = phase
                 pitch.setNeedsDisplay()
             }
         }
     }
     var currentTime: Float = 0.0 {
         didSet {
+            var _currentPhaseIndex: Int = 0
             for phaseIndex in 0 ..< exercise.phases.count {
                 let partialTotalDuration = exercise.phases[0 ..< phaseIndex].reduce(0.0, {$0 + $1.duration})
                 if (partialTotalDuration <= currentTime) {
-                    currentPhaseIndex = phaseIndex
+                    _currentPhaseIndex = phaseIndex
                 }
             }
+            currentPhaseIndex = _currentPhaseIndex
             let totalDurationTilCurrentPhase = exercise.phases[0 ..< currentPhaseIndex+1].reduce(0.0, {$0 + $1.duration})
             circularProgressView.updateProgress(
                 currentPahseTime: totalDurationTilCurrentPhase - currentTime,
@@ -75,6 +147,58 @@ class ExerciseExecutionViewController: UIViewController {
     var timer: Timer!
     var timerInterval: Float = 0.1
     var isExerciseRunning: Bool = false
+    var targetState: Bool = false
+    
+    var clientModel: Model!
+    var targetElmentIndex:Int = 0
+    var jobs: [Job]!
+    var currentJobIndex: Int!
+    var relations: [GoalNodeRelation] = []
+    
+    var _jobs: [_Job]!
+    var _currentJobIndex: Int!
+    
+    var nodes: [Node] = []
+    var groups: [Group] = []
+    var color: [UInt8] = []
+    var applicationKey: ApplicationKey!
+    private var newName: String!
+    private var newKey: Data! = Data.random128BitKey()
+    private var keyIndex: KeyIndex!
+    private var newBoundNetworkKeyIndex: KeyIndex?
+    private var ttl: UInt8 = 0x7F
+    private var periodSteps: UInt8 = 1
+    private var periodResolution: StepResolution = .hundredsOfMilliseconds
+    private var retransmissionCount: UInt8 = 5
+    private var retransmissionIntervalSteps: UInt8 = 0
+    weak var delegate: ProvisioningViewDelegate?
+    var key: Key? {
+        didSet {
+            if let key = key {
+                newKey = key.key
+            }
+            isApplicationKey = key is ApplicationKey
+        }
+    }
+    var isApplicationKey: Bool! {
+        didSet {
+            let network = MeshNetworkManager.instance.meshNetwork!
+            
+            newName  = key?.name ?? defaultName
+            keyIndex = key?.index ?? (isApplicationKey ?
+                network.nextAvailableApplicationKeyIndex :
+                network.nextAvailableNetworkKeyIndex)
+            if isApplicationKey {
+                newBoundNetworkKeyIndex = (key as? ApplicationKey)?.boundNetworkKeyIndex ?? 0
+            } else {
+                newBoundNetworkKeyIndex = nil
+            }
+        }
+    }
+    var defaultName: String {
+        let network = MeshNetworkManager.instance.meshNetwork!
+        return "App Key \((network.nextAvailableApplicationKeyIndex ?? 0xFFF) + 1)"
+    }
     
     fileprivate lazy var currentStateDisplayCard: UIView = {
         let view = UIView()
@@ -281,7 +405,83 @@ class ExerciseExecutionViewController: UIViewController {
             currentPahseTime: exercise.phases[0].duration,
             currentPhaseProgress: 1.0
         )
+        
+        MeshNetworkManager.instance.delegate = self
+        let network = MeshNetworkManager.instance.meshNetwork!
+        nodes = network.nodes
+        groups = network.groups
+        
+        relations = []
+        let positions: [GoalPosition] = [
+            .upperLeft,
+            .lowerLeft,
+            .upperRight,
+            .lowerRight
+        ]
+        for (i, node) in nodes.filter({ !$0.isProvisioner }).enumerated() {
+            relations.append(GoalNodeRelation(position: positions[i], node: node))
+        }
+        
+        // Create 1 application key
+        if network.applicationKeys.count == 0 {
+            createAndSaveApplicationKey()
+        }
+        applicationKey = network.applicationKeys[0]
+        // Create groups
+        for group in groups {
+            print("Ω", group.name)
+        }
+        
+        if let provisionersNode = network.nodes.first(where: { $0.isLocalProvisioner }),
+           let primaryElement = provisionersNode.elements.first(where: { $0.location == .first }),
+           let _ = primaryElement.models.first(where: { $0.name == "Generic OnOff Client" })
+           {
+            clientModel = primaryElement.models.first(where: { $0.name == "Generic OnOff Client" })!
+        }
+        
+        defer {
+            publishColorMessage(clientModel: clientModel, colorCode: 2)
+        }
+        
+        color = []
+        let phase: Phase = exercise.phases[0]
+        for goal in phase.goals {
+            let position: GoalPosition = goal.position
+            let filteredRelations = relations.filter{$0.position == position}
+            if filteredRelations.count != 0 {
+                let goalColor = goal.color
+                var colorCode: UInt8!
+                switch goalColor {
+                case .pink:
+                    colorCode = 2
+                    color.append(colorCode)
+                case .blue:
+                    colorCode = 4
+                    color.append(colorCode)
+                }
+            }
+        }
+        
+        setPublication(clientModel: clientModel, destinationAddress: LEDGroupAddress)
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        MeshNetworkManager.instance.delegate = self
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if let workingTimer = timer{
+            workingTimer.invalidate()
+        }
+    }
+    
+    deinit {
+            print("Ω ExerciseExecutionViewControllerがdeinitされました")
+        }
     
     func setupConstraints() {
         currentStateDisplayCard.bottomAnchor.constraint(equalTo: startAndPauseButton.topAnchor, constant: -marginWidth).isActive = true
@@ -392,6 +592,49 @@ class ExerciseExecutionViewController: UIViewController {
     
     @objc func moveToBeginning() {
             currentTime = 0
+    }
+    
+    func createAndSaveNewGroup(name: String, address: MeshAddress) {
+        let network = MeshNetworkManager.instance.meshNetwork!
+        // Try assigning next available Group Address.
+        LEDGroup = try! Group(name: name, address: address)
+        try! network.add(group: LEDGroup)
+        if MeshNetworkManager.instance.save() {
+            presentAlert(title: "Group Succesfully Saved", message: "New group saved.")
+        } else {
+            presentAlert(title: "Error", message: "Mesh configuration could not be saved.")
+        }
+    }
+    
+    func publishColorMessage(clientModel: Model,colorCode: UInt8) {
+        _ = MeshNetworkManager.instance.publish(GenericOnOffSet(colorCode, transitionTime: TransitionTime(0.0), delay: 0), from: clientModel)
+    }
+    
+    func setPublication(clientModel: Model, destinationAddress: MeshAddress?) {
+        // Set new publication
+        print("Ω setPublication",clientModel)
+        guard let destination = destinationAddress, let applicationKey = applicationKey else {
+            return
+        }
+        let publish = Publish(to: destination, using: applicationKey,
+                              usingFriendshipMaterial: false, ttl: self.ttl,
+                              periodSteps: self.periodSteps, periodResolution: self.periodResolution,
+                              retransmit: Publish.Retransmit(publishRetransmitCount: self.retransmissionCount,
+                                                             intervalSteps: self.retransmissionIntervalSteps))
+        let message: ConfigMessage =
+            ConfigModelPublicationSet(publish, to: clientModel) ??
+            ConfigModelPublicationVirtualAddressSet(publish, to: clientModel)!
+        try! MeshNetworkManager.instance.send(message, to: clientModel)
+    }
+    
+    func createAndSaveApplicationKey() {
+        let network = MeshNetworkManager.instance.meshNetwork!
+        newName = "New Application Key"
+        key = try! network.add(applicationKey: newKey, name: newName)
+        if MeshNetworkManager.instance.save() {
+        } else {
+            presentAlert(title: "Error", message: "Mesh configuration could not be saved.")
+        }
     }
 }
 
@@ -517,7 +760,7 @@ class PitchView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        let goalWidth: CGFloat = 0.02 * self.frame.width
+        let goalWidth: CGFloat = 0.03 * self.frame.width
         let goalHeight: CGFloat = 0.2 * self.frame.height
         let verticalMarginToNearestHorizontalLine: CGFloat = 0.1 * self.frame.width
         for goal in phase.goals {
@@ -632,5 +875,116 @@ class PitchView: UIView {
         let centerCircle = UIBezierPath(arcCenter: CGPoint(x: self.frame.size.width / 2.0, y: self.frame.size.height / 2.0), radius: 0.3 * self.frame.size.height / 2, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
         UIColor.black.setStroke()
         centerCircle.stroke()
+    }
+}
+
+extension ExerciseExecutionViewController: MeshNetworkDelegate{
+    func meshNetworkManager(_ manager: MeshNetworkManager,
+                            didReceiveMessage message: MeshMessage,
+                            sentFrom source: Address, to destination: Address) {
+        print("Ω didReceiveMessage", message)
+        guard !(message is ConfigNodeReset) else {
+            (UIApplication.shared.delegate as! AppDelegate).meshNetworkDidChange()
+            done() {
+                let rootViewControllers = self.presentingViewController?.children
+                self.dismiss(animated: true) {
+                    rootViewControllers?.forEach {
+                        if let navigationController = $0 as? UINavigationController {
+                            navigationController.popToRootViewController(animated: true)
+                        }
+                    }
+                }
+            }
+            return
+        }
+        
+        // Handle the message based on its type.
+//        switch message {
+//
+//        case let status as ConfigModelPublicationStatus:
+//            if status.status == .success {
+//                print("Ω status",status)
+//                print("Ω elementAddress",status.elementAddress)
+//                print("¥ function publish",#function)
+//                publishColorMessage()
+//            }
+//            done() {
+//                if status.status == .success {
+//                    self.dismiss(animated: true)
+//                } else {
+//                    self.presentAlert(title: "Error", message: status.message)
+//                }
+//            }
+//
+////        case let status as ConfigModelSubscriptionStatus:
+//
+//        case let status as GenericOnOffStatus:
+//            let job: Job = jobs[currentJobIndex]
+//            let address: MeshAddress = job.address
+//            let targetState: Bool = job.targetState
+//            let actualState: UInt8 = status.color
+//            if address.address == source {
+////                print("≈\(source) received message")
+//                if currentJobIndex < jobs.count-1 {
+//                    currentJobIndex += 1
+//                    print("Ω currentJobIndex",currentJobIndex)
+//                    setPublication()
+//                }
+//            }
+//
+//        case is ConfigNodeReset:
+//            // The node has been reset remotely.
+//            (UIApplication.shared.delegate as! AppDelegate).meshNetworkDidChange()
+//            presentAlert(title: "Reset", message: "The mesh network was reset remotely.")
+//
+//        default:
+//            break
+//        }
+        
+        switch message {
+
+        case let status as ConfigModelPublicationStatus:
+            if status.status == .success {
+            }
+            done() {
+                if status.status == .success {
+                    self.dismiss(animated: true)
+                } else {
+                    self.presentAlert(title: "Error", message: status.message)
+                }
+            }
+
+        case let status as GenericOnOffStatus:
+            print("Ω", status)
+
+        case is ConfigNodeReset:
+            // The node has been reset remotely.
+            (UIApplication.shared.delegate as! AppDelegate).meshNetworkDidChange()
+            presentAlert(title: "Reset", message: "The mesh network was reset remotely.")
+
+        default:
+            break
+        }
+    }
+    
+    func meshNetworkManager(_ manager: MeshNetworkManager, didSendMessage message: MeshMessage, from localElement: Element, to destination: Address) {
+    }
+    
+    func meshNetworkManager(_ manager: MeshNetworkManager,
+                            failedToSendMessage message: MeshMessage,
+                            from localElement: Element, to destination: Address,
+                            error: Error) {
+        done() {
+            self.presentAlert(title: "Error", message: error.localizedDescription)
+        }
+    }
+}
+
+extension ExerciseExecutionViewController: ModelControlDelegate {
+    
+    func publish(_ message: MeshMessage, description: String, fromModel model: Model) {
+        start(description) {
+            return MeshNetworkManager.instance.publish(message, from: model)
+        }
     }
 }
