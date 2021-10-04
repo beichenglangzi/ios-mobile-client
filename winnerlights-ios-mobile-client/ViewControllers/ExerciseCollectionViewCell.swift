@@ -28,6 +28,16 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
                     Goal(position: .lowerLeft, color: .pink),
                     Goal(position: .upperRight, color: .blue),
                     Goal(position: .lowerRight, color: .blue),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                    Player(number: .player7, color: .blue),
+                    Player(number: .player8, color: .blue),
                 ]
             ),
             Phase(
@@ -37,6 +47,16 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
                     Goal(position: .lowerLeft, color: .blue),
                     Goal(position: .upperRight, color: .pink),
                     Goal(position: .lowerRight, color: .pink),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                    Player(number: .player7, color: .blue),
+                    Player(number: .player8, color: .blue),
                 ]
             ),
             Phase(
@@ -46,6 +66,16 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
                     Goal(position: .lowerLeft, color: .pink),
                     Goal(position: .upperRight, color: .blue),
                     Goal(position: .lowerRight, color: .blue),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                    Player(number: .player7, color: .blue),
+                    Player(number: .player8, color: .blue),
                 ]
             ),
             Phase(
@@ -55,6 +85,16 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
                     Goal(position: .lowerLeft, color: .blue),
                     Goal(position: .upperRight, color: .pink),
                     Goal(position: .lowerRight, color: .pink),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                    Player(number: .player7, color: .blue),
+                    Player(number: .player8, color: .blue),
                 ]
             )
         ]

@@ -22,6 +22,10 @@ struct Goal {
     let color: GoalColor
     var node: Node!
 }
+struct Player {
+    let number: PlayerNumber
+    var color: PlayerColor
+}
 enum GoalPosition {
     case upperLeft
     case lowerLeft
@@ -32,9 +36,24 @@ enum GoalColor {
     case pink
     case blue
 }
+enum PlayerColor {
+    case pink
+    case blue
+}
+enum PlayerNumber {
+    case player1
+    case player2
+    case player3
+    case player4
+    case player5
+    case player6
+    case player7
+    case player8
+}
 struct Phase {
     var duration: Float
     let goals: [Goal]
+    let players: [Player]
 }
 struct Exercise {
     var title: String
@@ -781,14 +800,33 @@ class PitchView: UIView {
                     drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: self.frame.height - verticalMarginToNearestHorizontalLine - goalHeight, width: goalWidth, height: goalHeight))
             }
         }
-        self.addSubview(Player1)
-        self.addSubview(Player2)
-        self.addSubview(Player3)
-        self.addSubview(Player4)
-        self.addSubview(Player5)
-        self.addSubview(Player6)
-        self.addSubview(Player7)
-        self.addSubview(Player8)
+        
+        for player in phase.players {
+            switch player.color {
+                case .pink:
+                    tintColor = .systemPink
+                case .blue:
+                    tintColor = .systemBlue
+            }
+            switch player.number {
+                case .player1:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.075, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                case .player2:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.275, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                case .player3:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.075, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                case .player4:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.275, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                case .player5:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.6, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                case .player6:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                case .player7:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.6, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                case .player8:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+            }
+        }
         drawCenterVerticalLine()
         drawCenterCircle()
     }
@@ -798,69 +836,13 @@ class PitchView: UIView {
         goalRect.fill()
     }
     
-    fileprivate lazy var Player1: UIImageView = {
+    func drawPlayer(rect: CGRect, color: UIColor) {
         let imageview = UIImageView(image: UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate))
-        imageview.tintColor = .systemPink
-        imageview.frame = CGRect(x: self.frame.width*0.075, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125)
+        imageview.frame = rect
+        imageview.tintColor = color
         imageview.contentMode = UIView.ContentMode.scaleAspectFit
-            return imageview
-        }()
-    
-    fileprivate lazy var Player2: UIImageView = {
-        let imageview = UIImageView(image: UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate))
-        imageview.tintColor = .systemPink
-        imageview.frame = CGRect(x: self.frame.width*0.275, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125)
-        imageview.contentMode = UIView.ContentMode.scaleAspectFit
-            return imageview
-        }()
-    
-    fileprivate lazy var Player3: UIImageView = {
-        let imageview = UIImageView(image: UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate))
-        imageview.tintColor = .systemPink
-        imageview.frame = CGRect(x: self.frame.width*0.075, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125)
-        imageview.contentMode = UIView.ContentMode.scaleAspectFit
-            return imageview
-        }()
-    
-    fileprivate lazy var Player4: UIImageView = {
-        let imageview = UIImageView(image: UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate))
-        imageview.tintColor = .systemPink
-        imageview.frame = CGRect(x: self.frame.width*0.275, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125)
-        imageview.contentMode = UIView.ContentMode.scaleAspectFit
-            return imageview
-        }()
-    
-    fileprivate lazy var Player5: UIImageView = {
-        let imageview = UIImageView(image: UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate))
-        imageview.tintColor = .systemBlue
-        imageview.frame = CGRect(x: self.frame.width*0.6, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125)
-        imageview.contentMode = UIView.ContentMode.scaleAspectFit
-            return imageview
-        }()
-
-    fileprivate lazy var Player6: UIImageView = {
-        let imageview = UIImageView(image: UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate))
-        imageview.tintColor = .systemBlue
-        imageview.frame = CGRect(x: self.frame.width*0.8, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125)
-        imageview.contentMode = UIView.ContentMode.scaleAspectFit
-            return imageview
-        }()
-
-    fileprivate lazy var Player7: UIImageView = {
-        let imageview = UIImageView(image: UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate))
-        imageview.tintColor = .systemBlue
-        imageview.frame = CGRect(x: self.frame.width*0.6, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125)
-        imageview.contentMode = UIView.ContentMode.scaleAspectFit
-            return imageview
-        }()
-
-    fileprivate lazy var Player8: UIImageView = {
-        let imageview = UIImageView(image: UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate))
-        imageview.tintColor = .systemBlue
-        imageview.frame = CGRect(x: self.frame.width*0.8, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125)
-        imageview.contentMode = UIView.ContentMode.scaleAspectFit
-            return imageview
-        }()
+        self.addSubview(imageview)
+    }
     
     func drawCenterVerticalLine() {
         let line = UIBezierPath()
