@@ -19,7 +19,7 @@ protocol PublicationDelegate {
 
 struct Goal {
     let position: GoalPosition
-    let color: GoalColor
+    var color: GoalColor
     var node: Node!
 }
 struct Player {
@@ -52,8 +52,8 @@ enum PlayerNumber {
 }
 struct Phase {
     var duration: Float
-    let goals: [Goal]
-    let players: [Player]
+    var goals: [Goal]
+    var players: [Player]
 }
 struct Exercise {
     var title: String
