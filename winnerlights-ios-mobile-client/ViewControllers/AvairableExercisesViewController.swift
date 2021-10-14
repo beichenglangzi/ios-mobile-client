@@ -409,16 +409,33 @@ class AvairableExercisesViewController: UIViewController {
         button.layer.shadowOffset = shadowOffset
         button.setTitle("+ Create New Exercise", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
-//        button.addTarget(self, action: #selector(someFunc), for: .touchUpInside)
+        button.addTarget(self, action: #selector(navigateToCreationView), for: .touchUpInside)
         return button
     }()
+    
+    fileprivate lazy var reloadButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "Reload", style: .plain, target: self, action: #selector(reload))
+        return button
+    }()
+    
+    @objc func navigateToCreationView() {
+        let vc = ExerciseCreationViewController()
+        vc.exercises_box = exercises
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func reload() {
+        print("Ω exercises", exercises.count)
+        exerciseCollectionView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.title = "Available Exercises"
+        self.navigationItem.leftBarButtonItem = reloadButton
         self.view.addSubview(exerciseCollectionView)
-        //self.view.addSubview(addButton)
+        self.view.addSubview(addButton)
         setupConstraint()
     }
     
@@ -433,10 +450,10 @@ class AvairableExercisesViewController: UIViewController {
         exerciseCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         exerciseCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         exerciseCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-//        addButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -20).isActive = true
-//        addButton.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
-//        addButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//        addButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        addButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -20).isActive = true
+        addButton.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
+        addButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        addButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
     }
 }
 
