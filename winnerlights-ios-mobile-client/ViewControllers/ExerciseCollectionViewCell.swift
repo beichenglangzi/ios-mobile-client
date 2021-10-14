@@ -206,5 +206,6 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
     func exerciseChange(exercise: Exercise){
         titleLabel.text = exercise.title
         descritionLabel.text = "Phase\t"+String(exercise.phases.count)
+        pitch.phase = exercise.phases[0]
     }
 }
