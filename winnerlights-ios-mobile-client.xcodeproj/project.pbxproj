@@ -50,6 +50,7 @@
 		657463F1251B16B00021A60D /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657463F0251B16B00021A60D /* ExerciseCollectionViewCell.swift */; };
 		657463F6251B1D160021A60D /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657463F5251B1D160021A60D /* ExerciseDetailViewController.swift */; };
 		657463FB251B342E0021A60D /* ExerciseExecutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657463FA251B342E0021A60D /* ExerciseExecutionViewController.swift */; };
+		65AA355F270B2CF5009AD177 /* ExerciseCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA355E270B2CF5009AD177 /* ExerciseCreationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		657463F0251B16B00021A60D /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
 		657463F5251B1D160021A60D /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		657463FA251B342E0021A60D /* ExerciseExecutionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseExecutionViewController.swift; sourceTree = "<group>"; };
+		65AA355E270B2CF5009AD177 /* ExerciseCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCreationViewController.swift; sourceTree = "<group>"; };
 		67CDA0BC93912A9E2A9CB02A /* Pods-winnerlights-ios-mobile-client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-winnerlights-ios-mobile-client.debug.xcconfig"; path = "Target Support Files/Pods-winnerlights-ios-mobile-client/Pods-winnerlights-ios-mobile-client.debug.xcconfig"; sourceTree = "<group>"; };
 		69A82B5E5F9A54D8411A5E0E /* Pods_winnerlights_ios_mobile_clientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_winnerlights_ios_mobile_clientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BBABB4C290968B7E17AD48 /* Pods-winnerlights-ios-mobile-client-winnerlights-ios-mobile-clientUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-winnerlights-ios-mobile-client-winnerlights-ios-mobile-clientUITests.release.xcconfig"; path = "Target Support Files/Pods-winnerlights-ios-mobile-client-winnerlights-ios-mobile-clientUITests/Pods-winnerlights-ios-mobile-client-winnerlights-ios-mobile-clientUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				657463E6251B15B70021A60D /* BLEMeshNetworkViewController.swift */,
 				657463F0251B16B00021A60D /* ExerciseCollectionViewCell.swift */,
 				657463F5251B1D160021A60D /* ExerciseDetailViewController.swift */,
+				65AA355E270B2CF5009AD177 /* ExerciseCreationViewController.swift */,
 				657463FA251B342E0021A60D /* ExerciseExecutionViewController.swift */,
 				226C6FDC25776D2500C9DA82 /* AvairablePeripheralViewController.swift */,
 			);
@@ -505,6 +508,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65AA355F270B2CF5009AD177 /* ExerciseCreationViewController.swift in Sources */,
 				657463E7251B15B70021A60D /* BLEMeshNetworkViewController.swift in Sources */,
 				22A0C03F2574CACC00ADB532 /* ProgressViewController.swift in Sources */,
 				22A0C01E2574CA9300ADB532 /* SimpleOnOffSetUnacknowledged.swift in Sources */,
