@@ -427,10 +427,12 @@ class AvairableExercisesViewController: UIViewController {
     @objc func reload() {
         print("Ω exercises", exercises.count)
         exerciseCollectionView.reloadData()
+        saveExercises(exercise: exercises)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        readData()
         self.view.backgroundColor = .white
         self.title = "Available Exercises"
         self.navigationItem.leftBarButtonItem = reloadButton
@@ -454,6 +456,27 @@ class AvairableExercisesViewController: UIViewController {
         addButton.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
         addButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         addButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    }
+    
+    func saveExercises(exercise: [Exercise]) {
+        let jsonEncoder = JSONEncoder()
+        guard let data = try? jsonEncoder.encode(exercise) else {
+            return
+        }
+        UserDefaults.standard.set(data, forKey: "exercises")
+    }
+    
+    func loadExercises() -> [Exercise]? {
+        let jsonDecoder = JSONDecoder()
+        guard let data = UserDefaults.standard.data(forKey: "exercises"),
+              let newExercises = try? jsonDecoder.decode([Exercise].self, from: data) else {
+            return nil
+        }
+        return newExercises
+    }
+    
+    func readData() {
+        exercises = loadExercises() ?? exercises
     }
 }
 
