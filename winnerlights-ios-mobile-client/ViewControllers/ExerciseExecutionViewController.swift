@@ -17,30 +17,30 @@ protocol PublicationDelegate {
     func publicationChanged()
 }
 
-struct Goal {
+struct Goal: Codable {
     let position: GoalPosition
     var color: GoalColor
     var node: Node!
 }
-struct Player {
+struct Player: Codable {
     let number: PlayerNumber
     var color: PlayerColor
 }
-enum GoalPosition {
+enum GoalPosition: String, Codable {
     case upperLeft
     case lowerLeft
     case upperRight
     case lowerRight
 }
-enum GoalColor {
+enum GoalColor: String, Codable {
     case pink
     case blue
 }
-enum PlayerColor {
+enum PlayerColor: String, Codable {
     case pink
     case blue
 }
-enum PlayerNumber {
+enum PlayerNumber: String, Codable {
     case player1
     case player2
     case player3
@@ -50,12 +50,12 @@ enum PlayerNumber {
     case player7
     case player8
 }
-struct Phase {
+struct Phase: Codable {
     var duration: Float
     var goals: [Goal]
     var players: [Player]
 }
-struct Exercise {
+struct Exercise: Codable {
     var title: String
     var description: String
     var phases: [Phase]
