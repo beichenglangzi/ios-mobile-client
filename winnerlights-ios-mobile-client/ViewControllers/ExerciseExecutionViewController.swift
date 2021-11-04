@@ -483,6 +483,11 @@ class ExerciseExecutionViewController: ProgressViewController {
         
         setPublication(clientModel: clientModel, destinationAddress: LEDGroupAddress)
         
+        for node in nodes.filter({ !$0.isProvisioner }) {
+            setRelayEnable(serverNode: node)
+            print("≈ \(node.name) relay", node.features)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -645,6 +650,12 @@ class ExerciseExecutionViewController: ProgressViewController {
             ConfigModelPublicationVirtualAddressSet(publish, to: clientModel)!
         try! MeshNetworkManager.instance.send(message, to: clientModel)
     }
+    
+    func setRelayEnable(serverNode: Node) {
+            let message: ConfigMessage =
+                ConfigRelaySet(count: 1, steps: 15)
+            try! MeshNetworkManager.instance.send(message, to: serverNode)
+        }
     
     func createAndSaveApplicationKey() {
         let network = MeshNetworkManager.instance.meshNetwork!
