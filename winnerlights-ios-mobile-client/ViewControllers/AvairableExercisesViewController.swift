@@ -383,7 +383,77 @@ class AvairableExercisesViewController: UIViewController {
                     ]
                 )
             ]
-        )
+        ),
+        Exercise(
+            title: "Counter attack",
+            description: "There are four goals on the pitch. The game direction changes in the modified amount of time. So two goals are enlightened in the same color.The teams stay the same.",
+            phases: [
+                Phase(
+                    duration: 5,
+                    goals: [
+                        Goal(position: .upperLeft, color: .pink),
+                        Goal(position: .lowerLeft, color: .pink),
+                        Goal(position: .upperRight, color: .blue),
+                        Goal(position: .lowerRight, color: .blue),
+                    ],
+                    players: [
+                        Player(number: .player1, color: .pink),
+                        Player(number: .player2, color: .pink),
+                        Player(number: .player3, color: .pink),
+                        Player(number: .player4, color: .pink),
+                        Player(number: .player5, color: .blue)
+                    ]
+                   ),
+                Phase(
+                    duration: 5,
+                    goals: [
+                        Goal(position: .upperLeft, color: .blue),
+                        Goal(position: .lowerLeft, color: .blue),
+                        Goal(position: .upperRight, color: .pink),
+                        Goal(position: .lowerRight, color: .pink),
+                    ],
+                    players: [
+                        Player(number: .player1, color: .pink),
+                        Player(number: .player2, color: .pink),
+                        Player(number: .player3, color: .pink),
+                        Player(number: .player4, color: .blue),
+                        Player(number: .player5, color: .pink)
+                    ]
+                   ),
+                Phase(
+                    duration: 5,
+                    goals: [
+                        Goal(position: .upperLeft, color: .pink),
+                        Goal(position: .lowerLeft, color: .pink),
+                        Goal(position: .upperRight, color: .blue),
+                        Goal(position: .lowerRight, color: .blue),
+                    ],
+                    players: [
+                        Player(number: .player1, color: .pink),
+                        Player(number: .player2, color: .pink),
+                        Player(number: .player3, color: .blue),
+                        Player(number: .player4, color: .pink),
+                        Player(number: .player5, color: .pink)
+                    ]
+                   ),
+                Phase(
+                    duration: 5,
+                    goals: [
+                        Goal(position: .upperLeft, color: .blue),
+                        Goal(position: .lowerLeft, color: .blue),
+                        Goal(position: .upperRight, color: .pink),
+                        Goal(position: .lowerRight, color: .pink),
+                    ],
+                    players: [
+                        Player(number: .player1, color: .pink),
+                        Player(number: .player2, color: .blue),
+                        Player(number: .player3, color: .pink),
+                        Player(number: .player4, color: .pink),
+                        Player(number: .player5, color: .pink)
+                    ]
+                   )
+                ]
+            )
     ]
     
     // Initialization closures

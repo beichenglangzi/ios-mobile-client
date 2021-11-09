@@ -792,7 +792,15 @@ class PitchView: UIView {
     override func draw(_ rect: CGRect) {
         let goalWidth: CGFloat = 0.03 * self.frame.width
         let goalHeight: CGFloat = 0.2 * self.frame.height
+        let playerCenterX: CGFloat = self.frame.width / 2 - (self.frame.height*0.15 / 2)
+        let playerCenterY: CGFloat = self.frame.height / 2 - (self.frame.height*0.15 / 2)
         let verticalMarginToNearestHorizontalLine: CGFloat = 0.1 * self.frame.width
+        
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
+        
+        if phase.players.count == 8 {
         for goal in phase.goals {
             switch goal.color {
                 case .pink:
@@ -840,6 +848,52 @@ class PitchView: UIView {
         }
         drawCenterVerticalLine()
         drawCenterCircle()
+        }
+        
+        if phase.players.count == 5 {
+            for goal in phase.goals {
+                switch goal.color {
+                    case .pink:
+                        UIColor.systemPink.setFill()
+                    case .blue:
+                        UIColor.systemBlue.setFill()
+                }
+                switch goal.position {
+                    case .upperLeft:
+                        drawGoal(rect: CGRect(x: self.frame.width / 2 - goalHeight / 2, y: 0.2 * self.frame.height / 2 - goalWidth, width: goalHeight, height: goalWidth))
+                    case .lowerLeft:
+                        drawGoal(rect: CGRect(x: self.frame.width / 2 - 0.8 * self.frame.size.height / 2 - goalWidth, y: self.frame.height / 2 - goalHeight / 2, width: goalWidth, height: goalHeight))
+                    case .upperRight:
+                        drawGoal(rect: CGRect(x: self.frame.width / 2 - goalHeight / 2, y: 1.8 * self.frame.height / 2 , width: goalHeight, height: goalWidth))
+                    case .lowerRight:
+                        drawGoal(rect: CGRect(x: self.frame.width / 2 + 0.8 * self.frame.size.height / 2, y: self.frame.height / 2 - goalHeight / 2, width: goalWidth, height: goalHeight))
+                }
+            }
+            
+            for player in phase.players {
+                switch player.color {
+                    case .pink:
+                        tintColor = .systemPink
+                    case .blue:
+                        tintColor = .systemBlue
+                }
+                switch player.number {
+                    case .player1:
+                        drawPlayer(rect: CGRect(x: playerCenterX, y: playerCenterY, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+                    case .player2:
+                        drawPlayer(rect: CGRect(x: playerCenterX - 0.7 * self.frame.size.height / 2, y: playerCenterY - 0.7 * self.frame.size.height / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+                    case .player3:
+                        drawPlayer(rect: CGRect(x: playerCenterX - 0.7 * self.frame.size.height / 2, y: playerCenterY + 0.7 * self.frame.size.height / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+                    case .player4:
+                        drawPlayer(rect: CGRect(x: playerCenterX + 0.7 * self.frame.size.height / 2, y: playerCenterY - 0.7 * self.frame.size.height / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+                    case .player5:
+                        drawPlayer(rect: CGRect(x: playerCenterX + 0.7 * self.frame.size.height / 2, y: playerCenterY + 0.7 * self.frame.size.height / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+                default:
+                    break
+                }
+            }
+            drawCircle()
+        }
     }
 
     func drawGoal(rect: CGRect) {
@@ -869,6 +923,13 @@ class PitchView: UIView {
         UIColor.black.setStroke()
         centerCircle.stroke()
     }
+    
+    func drawCircle() {
+        let centerCircle = UIBezierPath(arcCenter: CGPoint(x: self.frame.size.width / 2.0, y: self.frame.size.height / 2.0), radius: 0.8 * self.frame.size.height / 2, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
+        UIColor.black.setStroke()
+        centerCircle.stroke()
+    }
+
 }
 
 extension ExerciseExecutionViewController: MeshNetworkDelegate{

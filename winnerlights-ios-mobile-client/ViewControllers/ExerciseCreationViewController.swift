@@ -23,6 +23,7 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
     var dataSourceTotalPhaseCount:[Int] = ([Int])(1...10)
     var dataSourceCurrentPhaseCount:[Int] = ([Int])(1...10)
     let dataSourseColor:[String] = ([String])(arrayLiteral: "Red","Blue")
+    let dataSourseExerciseType:[String] = ([String])(arrayLiteral: "Team","Personal")
     var currentPhaseIndex: Int = 0
     
     var exercises_box: [Exercise]!
@@ -70,6 +71,24 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
                         )
                     ]
     
+    var personalPhaseDefalut = Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .blue),
+                    Goal(position: .lowerRight, color: .blue),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .blue),
+                ]
+            )
+    lazy var personalPhaseArray = Array(repeating: personalPhaseDefalut, count: totalPhaseCount)
+    
     fileprivate lazy var exerciseTitleTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -100,7 +119,49 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
         return textField
     }()
     
-    fileprivate lazy var pitch: PitchView = {
+    fileprivate lazy var exerciseTypeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Exercise Type"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 20, weight: .medium)
+        label.textAlignment = .center
+        label.textColor = .black
+        return label
+    }()
+    
+    fileprivate lazy var exerciseTypeRoll: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.translatesAutoresizingMaskIntoConstraints = false
+        pickerView.backgroundColor = .clear
+        pickerView.tag = 17
+        pickerView.isHidden = true
+        pickerView.delegate   = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
+    
+    fileprivate lazy var exerciseTypeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .white
+        button.layer.cornerRadius = cornerRadius
+        button.layer.shadowOpacity = shadowOpacity
+        button.layer.shadowRadius = cornerRadius
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = shadowOffset
+        button.setTitle("Team", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(pickerViewDisplayexerciseType), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func pickerViewDisplayexerciseType() {
+        exerciseTypeButton.isHidden = true
+        exerciseTypeRoll.isHidden = false
+    }
+    
+    lazy var pitch: PitchView = {
         let view = PitchView(phase: phaseDefalut)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
@@ -714,6 +775,8 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
             return String(dataSourceCurrentPhaseCount[row])
         case 5,6,7,8,9,10,11,12:
             return dataSourseColor[row]
+        case 17:
+            return dataSourseExerciseType[row]
         default:
             return String(dataSourceMinute[row])
         }
@@ -737,6 +800,8 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
             return dataSourceCurrentPhaseCount.count
         case 5,6,7,8,9,10,11,12,13,14,15,16:
             return dataSourseColor.count
+        case 17:
+            return dataSourseExerciseType.count
         default:
             return dataSourceMinute.count
         }
@@ -769,8 +834,14 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
             partitionBarGroupView.setNeedsDisplay()
         case 3:
             totalPhaseCount = dataSourceTotalPhaseCount[row]
-            phaseArray = Array(repeating: phaseDefalut, count: totalPhaseCount)
-            newPhaseArray = phaseArray
+            if exerciseTypeButton.currentTitle == "Team" {
+                phaseArray = Array(repeating: phaseDefalut, count: totalPhaseCount)
+                newPhaseArray = phaseArray
+            }
+            if exerciseTypeButton.currentTitle == "Personal" {
+                personalPhaseArray = Array(repeating: personalPhaseDefalut, count: totalPhaseCount)
+                newPhaseArray = personalPhaseArray
+            }
             let totalDuration: Float = newPhaseArray.reduce(0.0, {$0 + $1.duration})
             phaseCountLabel.text = "Phase" + " " + "\(String(currentPhaseCount))/\(String(totalPhaseCount))"
             totalDurationTimeLabel.text = String(format:"%.0f", (totalDuration/60.0).rounded(.towardZero))+":"+String(format:"%02.0f", floor(totalDuration.truncatingRemainder(dividingBy: 60.0)))
@@ -945,6 +1016,23 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
             pitch.setNeedsDisplay()
             player8Roll.isHidden = true
             player8Button.isHidden = false
+        case 17:
+            switch dataSourseExerciseType[row] {
+            case "Team":
+                phaseArray = Array(repeating: phaseDefalut, count: totalPhaseCount)
+                newPhaseArray = phaseArray
+            case "Personal":
+                personalPhaseArray = Array(repeating: personalPhaseDefalut, count: totalPhaseCount)
+                newPhaseArray = personalPhaseArray
+            default:
+                break
+            }
+            print("Ω",newPhaseArray[currentPhaseCount-1].players.count)
+            pitch.phase = newPhaseArray[currentPhaseCount-1]
+            pitch.setNeedsDisplay()
+            exerciseTypeButton.setTitle(String(dataSourseExerciseType[row]), for: .normal)
+            exerciseTypeRoll.isHidden = true
+            exerciseTypeButton.isHidden = false
         default:
             break
         }
@@ -969,6 +1057,9 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
             return cellLabel
         case 5,6,7,8,9,10,11,12,13,14,15,16:
             cellLabel.text = dataSourseColor[row]
+            return cellLabel
+        case 17:
+            cellLabel.text = dataSourseExerciseType[row]
             return cellLabel
         default:
             cellLabel.text = String(dataSourceMinute[row])
@@ -1026,6 +1117,9 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
         view.backgroundColor = .white
         descriptionContainerView.addSubview(exerciseTitleTextField)
         descriptionContainerView.addSubview(exerciseDescriptionTextField)
+        descriptionContainerView.addSubview(exerciseTypeLabel)
+        descriptionContainerView.addSubview(exerciseTypeButton)
+        descriptionContainerView.addSubview(exerciseTypeRoll)
         view.addSubview(descriptionContainerView)
         previewContainerView.addSubview(pitch)
         previewContainerView.addSubview(upperLeftGoalButton)
@@ -1092,6 +1186,18 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
         exerciseDescriptionTextField.topAnchor.constraint(equalTo: exerciseTitleTextField.bottomAnchor, constant: marginWidth).isActive = true
         exerciseDescriptionTextField.leadingAnchor.constraint(equalTo: descriptionContainerView.leadingAnchor, constant: marginWidth*3).isActive = true
         exerciseDescriptionTextField.trailingAnchor.constraint(equalTo: descriptionContainerView.trailingAnchor, constant: -marginWidth*3).isActive = true
+        
+        exerciseTypeLabel.topAnchor.constraint(equalTo: exerciseDescriptionTextField.bottomAnchor, constant: marginWidth*2).isActive = true
+        exerciseTypeLabel.leadingAnchor.constraint(equalTo: descriptionContainerView.leadingAnchor, constant: marginWidth*3).isActive = true
+        
+        exerciseTypeButton.leadingAnchor.constraint(equalTo: descriptionContainerView.centerXAnchor, constant: marginWidth*2).isActive = true
+        exerciseTypeButton.trailingAnchor.constraint(equalTo: descriptionContainerView.trailingAnchor, constant: -marginWidth*2).isActive = true
+        exerciseTypeButton.centerYAnchor.constraint(equalTo: exerciseTypeLabel.centerYAnchor).isActive = true
+
+        exerciseTypeRoll.leadingAnchor.constraint(equalTo: descriptionContainerView.centerXAnchor, constant: marginWidth*2).isActive = true
+        exerciseTypeRoll.trailingAnchor.constraint(equalTo: descriptionContainerView.trailingAnchor, constant: -marginWidth*2).isActive = true
+        exerciseTypeRoll.centerXAnchor.constraint(equalTo: exerciseTypeButton.centerXAnchor).isActive = true
+        exerciseTypeRoll.centerYAnchor.constraint(equalTo: exerciseTypeButton.centerYAnchor).isActive = true
         
         pitch.topAnchor.constraint(equalTo: previewContainerView.topAnchor, constant: marginWidth).isActive = true
         pitch.leadingAnchor.constraint(equalTo: previewContainerView.leadingAnchor, constant: marginWidth).isActive = true
