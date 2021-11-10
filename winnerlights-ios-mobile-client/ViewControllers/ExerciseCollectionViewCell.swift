@@ -207,5 +207,6 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
         titleLabel.text = exercise.title
         descritionLabel.text = "Phase\t"+String(exercise.phases.count)
         pitch.phase = exercise.phases[0]
+        pitch.setNeedsDisplay()
     }
 }
