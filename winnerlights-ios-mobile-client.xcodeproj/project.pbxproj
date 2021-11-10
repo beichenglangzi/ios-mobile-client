@@ -36,6 +36,7 @@
 		22A0C03E2574CACC00ADB532 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0C0342574CAC700ADB532 /* ConfigurationViewController.swift */; };
 		22A0C03F2574CACC00ADB532 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0C0352574CAC900ADB532 /* ProgressViewController.swift */; };
 		556DEFAD06E143B7F773C8B6 /* Pods_winnerlights_ios_mobile_client_winnerlights_ios_mobile_clientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0BD0108FD0B9275B0423A2 /* Pods_winnerlights_ios_mobile_client_winnerlights_ios_mobile_clientUITests.framework */; };
+		651763482737EBA600708641 /* SelectColorViewControllres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651763472737EBA600708641 /* SelectColorViewControllres.swift */; };
 		6574638D251AE6E10021A60D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6574638C251AE6E10021A60D /* AppDelegate.swift */; };
 		6574638F251AE6E10021A60D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6574638E251AE6E10021A60D /* SceneDelegate.swift */; };
 		65746396251AE6E10021A60D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65746395251AE6E10021A60D /* Assets.xcassets */; };
@@ -101,6 +102,7 @@
 		33AE613C94C7DF43AB2CFF42 /* Pods-winnerlights-ios-mobile-client-winnerlights-ios-mobile-clientUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-winnerlights-ios-mobile-client-winnerlights-ios-mobile-clientUITests.debug.xcconfig"; path = "Target Support Files/Pods-winnerlights-ios-mobile-client-winnerlights-ios-mobile-clientUITests/Pods-winnerlights-ios-mobile-client-winnerlights-ios-mobile-clientUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3FA2226BAF264C93DDE5E6E6 /* Pods_winnerlights_ios_mobile_client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_winnerlights_ios_mobile_client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61DF64EDD1D5A4F7AE416DA9 /* Pods-winnerlights-ios-mobile-client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-winnerlights-ios-mobile-client.release.xcconfig"; path = "Target Support Files/Pods-winnerlights-ios-mobile-client/Pods-winnerlights-ios-mobile-client.release.xcconfig"; sourceTree = "<group>"; };
+		651763472737EBA600708641 /* SelectColorViewControllres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorViewControllres.swift; sourceTree = "<group>"; };
 		65746389251AE6E10021A60D /* winnerlights-ios-mobile-client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "winnerlights-ios-mobile-client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6574638C251AE6E10021A60D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6574638E251AE6E10021A60D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				657463F5251B1D160021A60D /* ExerciseDetailViewController.swift */,
 				65AA355E270B2CF5009AD177 /* ExerciseCreationViewController.swift */,
 				657463FA251B342E0021A60D /* ExerciseExecutionViewController.swift */,
+				651763472737EBA600708641 /* SelectColorViewControllres.swift */,
 				226C6FDC25776D2500C9DA82 /* AvairablePeripheralViewController.swift */,
 			);
 			path = ViewControllers;
@@ -534,6 +537,7 @@
 				657463F6251B1D160021A60D /* ExerciseDetailViewController.swift in Sources */,
 				22A0C0222574CA9300ADB532 /* GenericLevelClientDelegate.swift in Sources */,
 				22A0C0112574CA9300ADB532 /* OobSelector.swift in Sources */,
+				651763482737EBA600708641 /* SelectColorViewControllres.swift in Sources */,
 				22A0C0232574CA9300ADB532 /* NetworkConnection.swift in Sources */,
 				657463D3251AEF240021A60D /* NavigationController.swift in Sources */,
 				22A0C0132574CA9300ADB532 /* UITableView+EmptyView.swift in Sources */,
