@@ -377,94 +377,6 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
         pickerView.dataSource = self
         return pickerView
     }()
-    
-    fileprivate lazy var player1Roll: UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.backgroundColor = .clear
-        pickerView.tag = 9
-        pickerView.isHidden = true
-        pickerView.delegate   = self
-        pickerView.dataSource = self
-        return pickerView
-    }()
-    
-    fileprivate lazy var player2Roll: UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.backgroundColor = .clear
-        pickerView.tag = 10
-        pickerView.isHidden = true
-        pickerView.delegate   = self
-        pickerView.dataSource = self
-        return pickerView
-    }()
-    
-    fileprivate lazy var player3Roll: UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.backgroundColor = .clear
-        pickerView.tag = 11
-        pickerView.isHidden = true
-        pickerView.delegate   = self
-        pickerView.dataSource = self
-        return pickerView
-    }()
-    
-    fileprivate lazy var player4Roll: UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.backgroundColor = .clear
-        pickerView.tag = 12
-        pickerView.isHidden = true
-        pickerView.delegate   = self
-        pickerView.dataSource = self
-        return pickerView
-    }()
-    
-    fileprivate lazy var player5Roll: UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.backgroundColor = .clear
-        pickerView.tag = 13
-        pickerView.isHidden = true
-        pickerView.delegate   = self
-        pickerView.dataSource = self
-        return pickerView
-    }()
-    
-    fileprivate lazy var player6Roll: UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.backgroundColor = .clear
-        pickerView.tag = 14
-        pickerView.isHidden = true
-        pickerView.delegate   = self
-        pickerView.dataSource = self
-        return pickerView
-    }()
-    
-    fileprivate lazy var player7Roll: UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.backgroundColor = .clear
-        pickerView.tag = 15
-        pickerView.isHidden = true
-        pickerView.delegate   = self
-        pickerView.dataSource = self
-        return pickerView
-    }()
-    
-    fileprivate lazy var player8Roll: UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.backgroundColor = .clear
-        pickerView.tag = 16
-        pickerView.isHidden = true
-        pickerView.delegate   = self
-        pickerView.dataSource = self
-        return pickerView
-    }()
         
     fileprivate lazy var phaseTimeButtonSecond: UIButton = {
         let button = UIButton()
@@ -622,151 +534,12 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
         lowerRightGoalRoll.isHidden = false
     }
     
-    fileprivate lazy var player1Button: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .clear
-        button.layer.cornerRadius = cornerRadius
-        button.layer.shadowOpacity = shadowOpacity
-        button.layer.shadowRadius = cornerRadius
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = shadowOffset
-        button.addTarget(self, action: #selector(pickerViewDisplayplayer1), for: .touchUpInside)
-        return button
-    }()
-    
     @objc func pickerViewDisplayplayer1(sender: UIButton) {
         vc.buttonTag = sender.tag
         vc.phaseArray = newPhaseArray
         vc.phaseCount = currentPhaseCount
         print("Ω Button1 tapped")
         self.present(vc, animated: true, completion: nil)
-    }
-    
-    fileprivate lazy var player2Button: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .clear
-        button.layer.cornerRadius = cornerRadius
-        button.layer.shadowOpacity = shadowOpacity
-        button.layer.shadowRadius = cornerRadius
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = shadowOffset
-        button.addTarget(self, action: #selector(pickerViewDisplayplayer2), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func pickerViewDisplayplayer2() {
-//        player2Button.isHidden = true
-//        player2Roll.isHidden = false
-    }
-    
-    fileprivate lazy var player3Button: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .clear
-        button.layer.cornerRadius = cornerRadius
-        button.layer.shadowOpacity = shadowOpacity
-        button.layer.shadowRadius = cornerRadius
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = shadowOffset
-        button.addTarget(self, action: #selector(pickerViewDisplayplayer3), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func pickerViewDisplayplayer3() {
-        player3Button.isHidden = true
-        player3Roll.isHidden = false
-    }
-    
-    fileprivate lazy var player4Button: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .clear
-        button.layer.cornerRadius = cornerRadius
-        button.layer.shadowOpacity = shadowOpacity
-        button.layer.shadowRadius = cornerRadius
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = shadowOffset
-        button.addTarget(self, action: #selector(pickerViewDisplayplayer4), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func pickerViewDisplayplayer4() {
-        player4Button.isHidden = true
-        player4Roll.isHidden = false
-    }
-    
-    fileprivate lazy var player5Button: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .clear
-        button.layer.cornerRadius = cornerRadius
-        button.layer.shadowOpacity = shadowOpacity
-        button.layer.shadowRadius = cornerRadius
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = shadowOffset
-        button.addTarget(self, action: #selector(pickerViewDisplayplayer5), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func pickerViewDisplayplayer5() {
-        player5Button.isHidden = true
-        player5Roll.isHidden = false
-    }
-    
-    fileprivate lazy var player6Button: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .clear
-        button.layer.cornerRadius = cornerRadius
-        button.layer.shadowOpacity = shadowOpacity
-        button.layer.shadowRadius = cornerRadius
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = shadowOffset
-        button.addTarget(self, action: #selector(pickerViewDisplayplayer6), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func pickerViewDisplayplayer6() {
-        player6Button.isHidden = true
-        player6Roll.isHidden = false
-    }
-    
-    fileprivate lazy var player7Button: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .clear
-        button.layer.cornerRadius = cornerRadius
-        button.layer.shadowOpacity = shadowOpacity
-        button.layer.shadowRadius = cornerRadius
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = shadowOffset
-        button.addTarget(self, action: #selector(pickerViewDisplayplayer7), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func pickerViewDisplayplayer7() {
-        player7Button.isHidden = true
-        player7Roll.isHidden = false
-    }
-    
-    fileprivate lazy var player8Button: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .clear
-        button.layer.cornerRadius = cornerRadius
-        button.layer.shadowOpacity = shadowOpacity
-        button.layer.shadowRadius = cornerRadius
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = shadowOffset
-        button.addTarget(self, action: #selector(pickerViewDisplayplayer8), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func pickerViewDisplayplayer8() {
-        player8Button.isHidden = true
-        player8Roll.isHidden = false
     }
         
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?  {
@@ -777,7 +550,7 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
             return String(dataSourceTotalPhaseCount[row])
         case 4:
             return String(dataSourceCurrentPhaseCount[row])
-        case 5,6,7,8,9,10,11,12:
+        case 5,6,7,8:
             return dataSourseColor[row]
         case 17:
             return dataSourseExerciseType[row]
@@ -802,7 +575,7 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
             return dataSourceTotalPhaseCount.count
         case 4:
             return dataSourceCurrentPhaseCount.count
-        case 5,6,7,8,9,10,11,12,13,14,15,16:
+        case 5,6,7,8:
             return dataSourseColor.count
         case 17:
             return dataSourseExerciseType.count
@@ -916,110 +689,6 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
             pitch.setNeedsDisplay()
             lowerRightGoalRoll.isHidden = true
             lowerRightGoalButton.isHidden = false
-        case 9:
-            switch dataSourseColor[row] {
-            case "Red":
-                newPhaseArray[currentPhaseCount-1].players[0].color = .pink
-            case "Blue":
-                newPhaseArray[currentPhaseCount-1].players[0].color = .blue
-            default:
-                break
-            }
-            pitch.phase = newPhaseArray[currentPhaseCount-1]
-            pitch.setNeedsDisplay()
-            player1Roll.isHidden = true
-            player1Button.isHidden = false
-        case 10:
-            switch dataSourseColor[row] {
-            case "Red":
-                newPhaseArray[currentPhaseCount-1].players[1].color = .pink
-            case "Blue":
-                newPhaseArray[currentPhaseCount-1].players[1].color = .blue
-            default:
-                break
-            }
-            pitch.phase = newPhaseArray[currentPhaseCount-1]
-            pitch.setNeedsDisplay()
-            player2Roll.isHidden = true
-            player2Button.isHidden = false
-        case 11:
-            switch dataSourseColor[row] {
-            case "Red":
-                newPhaseArray[currentPhaseCount-1].players[2].color = .pink
-            case "Blue":
-                newPhaseArray[currentPhaseCount-1].players[2].color = .blue
-            default:
-                break
-            }
-            pitch.phase = newPhaseArray[currentPhaseCount-1]
-            pitch.setNeedsDisplay()
-            player3Roll.isHidden = true
-            player3Button.isHidden = false
-        case 12:
-            switch dataSourseColor[row] {
-            case "Red":
-                newPhaseArray[currentPhaseCount-1].players[3].color = .pink
-            case "Blue":
-                newPhaseArray[currentPhaseCount-1].players[3].color = .blue
-            default:
-                break
-            }
-            pitch.phase = newPhaseArray[currentPhaseCount-1]
-            pitch.setNeedsDisplay()
-            player4Roll.isHidden = true
-            player4Button.isHidden = false
-        case 13:
-            switch dataSourseColor[row] {
-            case "Red":
-                newPhaseArray[currentPhaseCount-1].players[4].color = .pink
-            case "Blue":
-                newPhaseArray[currentPhaseCount-1].players[4].color = .blue
-            default:
-                break
-            }
-            pitch.phase = newPhaseArray[currentPhaseCount-1]
-            pitch.setNeedsDisplay()
-            player5Roll.isHidden = true
-            player5Button.isHidden = false
-        case 14:
-            switch dataSourseColor[row] {
-            case "Red":
-                newPhaseArray[currentPhaseCount-1].players[5].color = .pink
-            case "Blue":
-                newPhaseArray[currentPhaseCount-1].players[5].color = .blue
-            default:
-                break
-            }
-            pitch.phase = newPhaseArray[currentPhaseCount-1]
-            pitch.setNeedsDisplay()
-            player6Roll.isHidden = true
-            player6Button.isHidden = false
-        case 15:
-            switch dataSourseColor[row] {
-            case "Red":
-                newPhaseArray[currentPhaseCount-1].players[6].color = .pink
-            case "Blue":
-                newPhaseArray[currentPhaseCount-1].players[6].color = .blue
-            default:
-                break
-            }
-            pitch.phase = newPhaseArray[currentPhaseCount-1]
-            pitch.setNeedsDisplay()
-            player7Roll.isHidden = true
-            player7Button.isHidden = false
-        case 16:
-            switch dataSourseColor[row] {
-            case "Red":
-                newPhaseArray[currentPhaseCount-1].players[7].color = .pink
-            case "Blue":
-                newPhaseArray[currentPhaseCount-1].players[7].color = .blue
-            default:
-                break
-            }
-            pitch.phase = newPhaseArray[currentPhaseCount-1]
-            pitch.setNeedsDisplay()
-            player8Roll.isHidden = true
-            player8Button.isHidden = false
         case 17:
             switch dataSourseExerciseType[row] {
             case "Team":
@@ -1059,7 +728,7 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
         case 4:
             cellLabel.text = String(dataSourceCurrentPhaseCount[row])
             return cellLabel
-        case 5,6,7,8,9,10,11,12,13,14,15,16:
+        case 5,6,7,8:
             cellLabel.text = dataSourseColor[row]
             return cellLabel
         case 17:
@@ -1134,22 +803,6 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
         previewContainerView.addSubview(upperRightGoalRoll)
         previewContainerView.addSubview(lowerRightGoalButton)
         previewContainerView.addSubview(lowerRightGoalRoll)
-        previewContainerView.addSubview(player1Button)
-        previewContainerView.addSubview(player1Roll)
-        previewContainerView.addSubview(player2Button)
-        previewContainerView.addSubview(player2Roll)
-        previewContainerView.addSubview(player3Button)
-        previewContainerView.addSubview(player3Roll)
-        previewContainerView.addSubview(player4Button)
-        previewContainerView.addSubview(player4Roll)
-        previewContainerView.addSubview(player5Button)
-        previewContainerView.addSubview(player5Roll)
-        previewContainerView.addSubview(player6Button)
-        previewContainerView.addSubview(player6Roll)
-        previewContainerView.addSubview(player7Button)
-        previewContainerView.addSubview(player7Roll)
-        previewContainerView.addSubview(player8Button)
-        previewContainerView.addSubview(player8Roll)
         previewContainerView.addSubview(phaseCountLabel)
         previewContainerView.addSubview(progressView)
         previewContainerView.addSubview(partitionBarGroupView)
@@ -1246,70 +899,6 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
         lowerRightGoalRoll.trailingAnchor.constraint(equalTo: pitch.trailingAnchor).isActive = true
         lowerRightGoalRoll.centerXAnchor.constraint(equalTo: lowerRightGoalButton.centerXAnchor).isActive = true
         lowerRightGoalRoll.centerYAnchor.constraint(equalTo: lowerRightGoalButton.centerYAnchor, constant: marginWidth*1.5).isActive = true
-        
-        player1Button.centerYAnchor.constraint(equalTo: pitch.centerYAnchor, constant: -marginWidth*1.5).isActive = true
-        player1Button.centerXAnchor.constraint(equalTo: pitch.centerXAnchor, constant: -marginWidth*8).isActive = true
-        
-        player1Roll.leadingAnchor.constraint(equalTo: pitch.leadingAnchor, constant: marginWidth*0.3).isActive = true
-        player1Roll.trailingAnchor.constraint(equalTo: pitch.centerXAnchor, constant: -marginWidth*5).isActive = true
-        player1Roll.centerXAnchor.constraint(equalTo: player1Button.centerXAnchor).isActive = true
-        player1Roll.centerYAnchor.constraint(equalTo: player1Button.centerYAnchor).isActive = true
-        
-        player2Button.centerYAnchor.constraint(equalTo: pitch.centerYAnchor, constant: -marginWidth*1.5).isActive = true
-        player2Button.centerXAnchor.constraint(equalTo: pitch.centerXAnchor, constant: -marginWidth*3.5).isActive = true
-        
-        player2Roll.leadingAnchor.constraint(equalTo: pitch.leadingAnchor, constant: marginWidth*4.5).isActive = true
-        player2Roll.trailingAnchor.constraint(equalTo: pitch.centerXAnchor, constant: -marginWidth*0.5).isActive = true
-        player2Roll.centerXAnchor.constraint(equalTo: player2Button.centerXAnchor).isActive = true
-        player2Roll.centerYAnchor.constraint(equalTo: player2Button.centerYAnchor).isActive = true
-        
-        player3Button.centerYAnchor.constraint(equalTo: pitch.centerYAnchor, constant: marginWidth*3).isActive = true
-        player3Button.centerXAnchor.constraint(equalTo: pitch.centerXAnchor, constant: -marginWidth*8).isActive = true
-        
-        player3Roll.leadingAnchor.constraint(equalTo: pitch.leadingAnchor, constant: marginWidth*0.3).isActive = true
-        player3Roll.trailingAnchor.constraint(equalTo: pitch.centerXAnchor, constant: -marginWidth*5).isActive = true
-        player3Roll.centerXAnchor.constraint(equalTo: player3Button.centerXAnchor).isActive = true
-        player3Roll.centerYAnchor.constraint(equalTo: player3Button.centerYAnchor).isActive = true
-        
-        player4Button.centerYAnchor.constraint(equalTo: pitch.centerYAnchor, constant: marginWidth*3).isActive = true
-        player4Button.centerXAnchor.constraint(equalTo: pitch.centerXAnchor, constant: -marginWidth*3.5).isActive = true
-        
-        player4Roll.leadingAnchor.constraint(equalTo: pitch.leadingAnchor, constant: marginWidth*4.5).isActive = true
-        player4Roll.trailingAnchor.constraint(equalTo: pitch.centerXAnchor, constant: -marginWidth*0.5).isActive = true
-        player4Roll.centerXAnchor.constraint(equalTo: player4Button.centerXAnchor).isActive = true
-        player4Roll.centerYAnchor.constraint(equalTo: player4Button.centerYAnchor).isActive = true
-        
-        player5Button.centerYAnchor.constraint(equalTo: pitch.centerYAnchor, constant: -marginWidth*1.5).isActive = true
-        player5Button.centerXAnchor.constraint(equalTo: pitch.trailingAnchor, constant: -marginWidth*7.5).isActive = true
-        
-        player5Roll.leadingAnchor.constraint(equalTo: pitch.centerXAnchor, constant: marginWidth*0.5).isActive = true
-        player5Roll.trailingAnchor.constraint(equalTo: pitch.centerXAnchor, constant: marginWidth*6.5).isActive = true
-        player5Roll.centerXAnchor.constraint(equalTo: player5Button.centerXAnchor).isActive = true
-        player5Roll.centerYAnchor.constraint(equalTo: player5Button.centerYAnchor).isActive = true
-        
-        player6Button.centerYAnchor.constraint(equalTo: pitch.centerYAnchor, constant: -marginWidth*1.5).isActive = true
-        player6Button.centerXAnchor.constraint(equalTo: pitch.trailingAnchor, constant: -marginWidth*3).isActive = true
-        
-        player6Roll.leadingAnchor.constraint(equalTo: pitch.centerXAnchor, constant: marginWidth*5).isActive = true
-        player6Roll.trailingAnchor.constraint(equalTo: pitch.trailingAnchor, constant: -marginWidth*0.3).isActive = true
-        player6Roll.centerXAnchor.constraint(equalTo: player6Button.centerXAnchor).isActive = true
-        player6Roll.centerYAnchor.constraint(equalTo: player6Button.centerYAnchor).isActive = true
-        
-        player7Button.centerYAnchor.constraint(equalTo: pitch.centerYAnchor, constant: marginWidth*3).isActive = true
-        player7Button.centerXAnchor.constraint(equalTo: pitch.trailingAnchor, constant: -marginWidth*7.5).isActive = true
-        
-        player7Roll.leadingAnchor.constraint(equalTo: pitch.centerXAnchor, constant: marginWidth*0.5).isActive = true
-        player7Roll.trailingAnchor.constraint(equalTo: pitch.centerXAnchor, constant: marginWidth*6.5).isActive = true
-        player7Roll.centerXAnchor.constraint(equalTo: player7Button.centerXAnchor).isActive = true
-        player7Roll.centerYAnchor.constraint(equalTo: player7Button.centerYAnchor).isActive = true
-        
-        player8Button.centerYAnchor.constraint(equalTo: pitch.centerYAnchor, constant: marginWidth*3).isActive = true
-        player8Button.centerXAnchor.constraint(equalTo: pitch.trailingAnchor, constant: -marginWidth*3).isActive = true
-        
-        player8Roll.leadingAnchor.constraint(equalTo: pitch.centerXAnchor, constant: marginWidth*5).isActive = true
-        player8Roll.trailingAnchor.constraint(equalTo: pitch.trailingAnchor, constant: -marginWidth*0.3).isActive = true
-        player8Roll.centerXAnchor.constraint(equalTo: player8Button.centerXAnchor).isActive = true
-        player8Roll.centerYAnchor.constraint(equalTo: player8Button.centerYAnchor).isActive = true
         
         totalPhaseCountLabel.topAnchor.constraint(equalTo: pitch.bottomAnchor, constant: marginWidth*1.5).isActive = true
         totalPhaseCountLabel.trailingAnchor.constraint(equalTo: previewContainerView.centerXAnchor, constant: marginWidth*0.5).isActive = true
