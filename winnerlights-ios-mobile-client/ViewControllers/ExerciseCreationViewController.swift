@@ -26,6 +26,7 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
     let dataSourseExerciseType:[String] = ([String])(arrayLiteral: "Team","Personal")
     var currentPhaseIndex: Int = 0
     
+    let vc = SelectColorViewController()
     var exercises_box: [Exercise]!
     
     var totalPhaseCount: Int = 1
@@ -1176,6 +1177,13 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
         setupConstraints()
 
         navigationController?.delegate = self
+        self.vc.delegate = self
+        vc.modalPresentationStyle = .fullScreen
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        pitch.setNeedsDisplay()
     }
     
     func setupConstraints() {
@@ -1396,3 +1404,13 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
             print("Ω ExerciseCreationViewControllerがdeinitされました")
         }
 }
+
+extension ExerciseCreationViewController: SelectColorViewControllerDelegate {
+        func modalDidFinished(array: [Phase], count: Int) {
+            self.currentPhaseCount = count
+            self.newPhaseArray = array
+            pitch.phase = array[count-1]
+            self.vc.dismiss(animated: true, completion: nil)
+        }
+}
+
