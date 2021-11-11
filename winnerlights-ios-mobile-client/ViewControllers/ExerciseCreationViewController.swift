@@ -635,9 +635,12 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
         return button
     }()
     
-    @objc func pickerViewDisplayplayer1() {
-        player1Button.isHidden = true
-        player1Roll.isHidden = false
+    @objc func pickerViewDisplayplayer1(sender: UIButton) {
+        vc.buttonTag = sender.tag
+        vc.phaseArray = newPhaseArray
+        vc.phaseCount = currentPhaseCount
+        print("Ω Button1 tapped")
+        self.present(vc, animated: true, completion: nil)
     }
     
     fileprivate lazy var player2Button: UIButton = {
@@ -654,8 +657,8 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
     }()
     
     @objc func pickerViewDisplayplayer2() {
-        player2Button.isHidden = true
-        player2Roll.isHidden = false
+//        player2Button.isHidden = true
+//        player2Roll.isHidden = false
     }
     
     fileprivate lazy var player3Button: UIButton = {
