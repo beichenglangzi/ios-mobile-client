@@ -162,8 +162,8 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
         exerciseTypeRoll.isHidden = false
     }
     
-    lazy var pitch: PitchView = {
-        let view = PitchView(phase: phaseDefalut)
+    fileprivate lazy var pitch: EditPitchView = {
+        let view = EditPitchView(phase: phaseDefalut)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.layer.cornerRadius = 6
@@ -995,6 +995,235 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
     deinit {
             print("Ω ExerciseCreationViewControllerがdeinitされました")
         }
+}
+
+class EditPitchView: UIView {
+    var phase: Phase!
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .clear
+    }
+
+    init(phase: Phase) {
+        super.init(frame: .zero)
+        self.phase = phase
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func draw(_ rect: CGRect) {
+        let goalWidth: CGFloat = 0.03 * self.frame.width
+        let goalHeight: CGFloat = 0.2 * self.frame.height
+        let playerCenterX: CGFloat = self.frame.width / 2 - (self.frame.height*0.15 / 2)
+        let playerCenterY: CGFloat = self.frame.height / 2 - (self.frame.height*0.15 / 2)
+        let verticalMarginToNearestHorizontalLine: CGFloat = 0.1 * self.frame.width
+        
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
+        
+        if phase.players.count == 8 {
+        for goal in phase.goals {
+            switch goal.color {
+                case .pink:
+                    UIColor.systemPink.setFill()
+                case .blue:
+                    UIColor.systemBlue.setFill()
+            }
+            switch goal.position {
+                case .upperLeft:
+                    drawGoal(rect: CGRect(x: 0, y: verticalMarginToNearestHorizontalLine, width: goalWidth, height: goalHeight))
+                case .lowerLeft:
+                    drawGoal(rect: CGRect(x: 0, y: self.frame.height - verticalMarginToNearestHorizontalLine - goalHeight, width: goalWidth, height: goalHeight))
+                case .upperRight:
+                    drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: verticalMarginToNearestHorizontalLine, width: goalWidth, height: goalHeight))
+                case .lowerRight:
+                    drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: self.frame.height - verticalMarginToNearestHorizontalLine - goalHeight, width: goalWidth, height: goalHeight))
+            }
+        }
+        
+        for player in phase.players {
+            switch player.color {
+                case .pink:
+                    tintColor = .systemPink
+                case .blue:
+                    tintColor = .systemBlue
+            }
+            switch player.number {
+                case .player1:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.075, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor, playerButton: player1Button)
+                case .player2:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.275, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor, playerButton: player2Button)
+                case .player3:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.075, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor, playerButton: player3Button)
+                case .player4:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.275, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor, playerButton: player4Button)
+                case .player5:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.6, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor, playerButton: player5Button)
+                case .player6:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor, playerButton: player6Button)
+                case .player7:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.6, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor, playerButton: player7Button)
+                case .player8:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor, playerButton: player8Button)
+            }
+        }
+        drawCenterVerticalLine()
+        drawCenterCircle()
+        }
+        
+        if phase.players.count == 5 {
+            for goal in phase.goals {
+                switch goal.color {
+                    case .pink:
+                        UIColor.systemPink.setFill()
+                    case .blue:
+                        UIColor.systemBlue.setFill()
+                }
+                switch goal.position {
+                    case .upperLeft:
+                        drawGoal(rect: CGRect(x: self.frame.width / 2 - goalHeight / 2, y: 0.2 * self.frame.height / 2 - goalWidth, width: goalHeight, height: goalWidth))
+                    case .lowerLeft:
+                        drawGoal(rect: CGRect(x: self.frame.width / 2 - 0.8 * self.frame.size.height / 2 - goalWidth, y: self.frame.height / 2 - goalHeight / 2, width: goalWidth, height: goalHeight))
+                    case .upperRight:
+                        drawGoal(rect: CGRect(x: self.frame.width / 2 - goalHeight / 2, y: 1.8 * self.frame.height / 2 , width: goalHeight, height: goalWidth))
+                    case .lowerRight:
+                        drawGoal(rect: CGRect(x: self.frame.width / 2 + 0.8 * self.frame.size.height / 2, y: self.frame.height / 2 - goalHeight / 2, width: goalWidth, height: goalHeight))
+                }
+            }
+            
+            for player in phase.players {
+                switch player.color {
+                    case .pink:
+                        tintColor = .systemPink
+                    case .blue:
+                        tintColor = .systemBlue
+                }
+                switch player.number {
+                    case .player1:
+                        drawPlayer(rect: CGRect(x: playerCenterX, y: playerCenterY, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor, playerButton: player1Button)
+                    case .player2:
+                        drawPlayer(rect: CGRect(x: playerCenterX - 0.7 * self.frame.size.height / 2, y: playerCenterY - 0.7 * self.frame.size.height / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor, playerButton: player2Button)
+                    case .player3:
+                        drawPlayer(rect: CGRect(x: playerCenterX - 0.7 * self.frame.size.height / 2, y: playerCenterY + 0.7 * self.frame.size.height / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor, playerButton: player3Button)
+                    case .player4:
+                        drawPlayer(rect: CGRect(x: playerCenterX + 0.7 * self.frame.size.height / 2, y: playerCenterY - 0.7 * self.frame.size.height / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor, playerButton: player4Button)
+                    case .player5:
+                        drawPlayer(rect: CGRect(x: playerCenterX + 0.7 * self.frame.size.height / 2, y: playerCenterY + 0.7 * self.frame.size.height / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor, playerButton: player5Button)
+                default:
+                    break
+                }
+            }
+            drawCircle()
+        }
+    }
+
+    func drawGoal(rect: CGRect) {
+        let goalRect = UIBezierPath(rect: rect)
+        goalRect.fill()
+    }
+    
+    func drawPlayer(rect: CGRect, color: UIColor, playerButton: UIButton) {
+        playerButton.frame = rect
+        playerButton.tintColor = color
+        playerButton.contentMode = UIView.ContentMode.scaleAspectFit
+        self.addSubview(playerButton)
+    }
+    
+    func drawCenterVerticalLine() {
+        let line = UIBezierPath()
+        line.move(to: CGPoint(x: self.frame.width/2, y: 0))
+        line.addLine(to:CGPoint(x: self.frame.width/2, y: self.frame.height))
+        line.close()
+        UIColor.black.setStroke()
+        line.stroke()
+    }
+    
+    func drawCenterCircle() {
+        let centerCircle = UIBezierPath(arcCenter: CGPoint(x: self.frame.size.width / 2.0, y: self.frame.size.height / 2.0), radius: 0.3 * self.frame.size.height / 2, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
+        UIColor.black.setStroke()
+        centerCircle.stroke()
+    }
+    
+    func drawCircle() {
+        let centerCircle = UIBezierPath(arcCenter: CGPoint(x: self.frame.size.width / 2.0, y: self.frame.size.height / 2.0), radius: 0.8 * self.frame.size.height / 2, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
+        UIColor.black.setStroke()
+        centerCircle.stroke()
+    }
+
+    var player1Button: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
+        button.tag = 0
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        return button
+    }()
+
+    var player2Button: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
+        button.tag = 1
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        return button
+    }()
+       
+    var player3Button: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
+        button.tag = 2
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        return button
+    }()
+       
+    var player4Button: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
+        button.tag = 3
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        return button
+    }()
+       
+    var player5Button: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
+        button.tag = 4
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        return button
+    }()
+       
+    var player6Button: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
+        button.tag = 5
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        return button
+    }()
+       
+    var player7Button: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
+        button.tag = 6
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        return button
+    }()
+       
+    var player8Button: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
+        button.tag = 7
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        return button
+    }()
 }
 
 extension ExerciseCreationViewController: SelectColorViewControllerDelegate {
