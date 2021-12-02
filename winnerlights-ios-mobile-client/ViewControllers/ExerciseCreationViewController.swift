@@ -538,7 +538,6 @@ class ExerciseCreationViewController: UIViewController, UINavigationControllerDe
         vc.buttonTag = sender.tag
         vc.phaseArray = newPhaseArray
         vc.phaseCount = currentPhaseCount
-        print("Ω Button1 tapped")
         self.present(vc, animated: true, completion: nil)
     }
         
@@ -1129,6 +1128,7 @@ class EditPitchView: UIView {
         playerButton.frame = rect
         playerButton.tintColor = color
         playerButton.contentMode = UIView.ContentMode.scaleAspectFit
+        playerButton.isUserInteractionEnabled = true
         self.addSubview(playerButton)
     }
     
@@ -1154,76 +1154,99 @@ class EditPitchView: UIView {
     }
 
     var player1Button: UIButton = {
-        let button = UIButton()
+        let button = CustomButton(type: .custom)
         let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
         button.setImage(image, for: .normal)
         button.tag = 0
-        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        button.adjustsImageWhenDisabled = false
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchDownRepeat)
         return button
     }()
 
     var player2Button: UIButton = {
-        let button = UIButton()
+        let button = CustomButton(type: .custom)
         let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
         button.setImage(image, for: .normal)
         button.tag = 1
-        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        button.adjustsImageWhenDisabled = false
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchDownRepeat)
         return button
     }()
        
     var player3Button: UIButton = {
-        let button = UIButton()
+        let button = CustomButton(type: .custom)
         let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
         button.setImage(image, for: .normal)
         button.tag = 2
-        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        button.adjustsImageWhenDisabled = false
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchDownRepeat)
         return button
     }()
        
     var player4Button: UIButton = {
-        let button = UIButton()
+        let button = CustomButton(type: .custom)
         let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
         button.setImage(image, for: .normal)
         button.tag = 3
-        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        button.adjustsImageWhenDisabled = false
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchDownRepeat)
         return button
     }()
        
     var player5Button: UIButton = {
-        let button = UIButton()
+        let button = CustomButton(type: .custom)
         let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
         button.setImage(image, for: .normal)
         button.tag = 4
-        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        button.adjustsImageWhenDisabled = false
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchDownRepeat)
         return button
     }()
        
     var player6Button: UIButton = {
-        let button = UIButton()
+        let button = CustomButton(type: .custom)
         let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
         button.setImage(image, for: .normal)
         button.tag = 5
-        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        button.adjustsImageWhenDisabled = false
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchDownRepeat)
         return button
     }()
        
     var player7Button: UIButton = {
-        let button = UIButton()
+        let button = CustomButton(type: .custom)
         let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
         button.setImage(image, for: .normal)
         button.tag = 6
-        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        button.adjustsImageWhenDisabled = false
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchDownRepeat)
         return button
     }()
        
     var player8Button: UIButton = {
-        let button = UIButton()
+        let button = CustomButton(type: .custom)
         let image = UIImage(named: "t-shirt-black-silhouette")?.withRenderingMode(.alwaysTemplate)
         button.setImage(image, for: .normal)
         button.tag = 7
-        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchUpInside)
+        button.adjustsImageWhenDisabled = false
+        button.addTarget(self, action: #selector(ExerciseCreationViewController.pickerViewDisplayplayer1), for: .touchDownRepeat)
         return button
     }()
+}
+
+class CustomButton: UIButton {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        let view = touch?.view
+        let location = touch!.location(in: view)
+        let prevLocation = touch!.previousLocation(in: view)
+        var myFrame: CGRect = view!.frame
+        let deltaX: CGFloat = location.x - prevLocation.x
+        let deltaY: CGFloat = location.y - prevLocation.y
+        myFrame.origin.x += deltaX
+        myFrame.origin.y += deltaY
+        view!.frame = myFrame
+    }
 }
 
 extension ExerciseCreationViewController: SelectColorViewControllerDelegate {
