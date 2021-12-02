@@ -47,7 +47,7 @@ class NetworkConnection: NSObject, Bearer {
     
     /// Maximum number of connections that `NetworkConnection` can
     /// handle.
-    static let maxConnections = 1
+    static let maxConnections = 2
     /// The Bluetooth Central Manager instance that will scan and
     /// connect to proxies.
     let centralManager: CBCentralManager
