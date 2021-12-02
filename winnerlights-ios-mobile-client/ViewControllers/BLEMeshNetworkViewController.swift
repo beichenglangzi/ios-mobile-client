@@ -78,7 +78,7 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
     private var ttl: UInt8 = 0xFF
     private var periodSteps: UInt8 = 0
     private var periodResolution: StepResolution = .hundredsOfMilliseconds
-    private var retransmissionCount: UInt8 = 10
+    private var retransmissionCount: UInt8 = 2
     private var retransmissionIntervalSteps: UInt8 = 0
     weak var delegate: ProvisioningViewDelegate?
     var key: Key? {
