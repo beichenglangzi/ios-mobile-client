@@ -135,7 +135,7 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
         button.layer.shadowOffset = shadowOffset
         button.layer.borderWidth = buttonBorderWidth
         button.layer.borderColor = UIColor.white.cgColor
-        button.tag = 2
+        button.tag = 2222
         button.backgroundColor = .red
         button.addTarget(self, action: #selector(publishColorMessage), for: .touchUpInside)
         return button
@@ -151,7 +151,7 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
         button.layer.shadowOffset = shadowOffset
         button.layer.borderWidth = buttonBorderWidth
         button.layer.borderColor = UIColor.white.cgColor
-        button.tag = 3
+        button.tag = 3333
         button.addTarget(self, action: #selector(publishColorMessage), for: .touchUpInside)
         return button
     }()
@@ -164,7 +164,7 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
         button.layer.shadowRadius = cornerRadius
         button.layer.borderWidth = buttonBorderWidth
         button.layer.borderColor = UIColor.white.cgColor
-        button.tag = 4
+        button.tag = 4444
         button.addTarget(self, action: #selector(publishColorMessage), for: .touchUpInside)
         return button
     }()
@@ -315,7 +315,7 @@ class BLEMeshNetworkViewController: ProgressViewController, UINavigationControll
     }
     
     @objc func publishColorMessage(sender:UIButton) {
-        let messageHandler = MeshNetworkManager.instance.publish(GenericOnOffSet(UInt8(sender.tag), transitionTime: TransitionTime(0.0), delay: 1), from: clientModel)
+        let messageHandler = MeshNetworkManager.instance.publish(GenericOnOffSetUnacknowledged(UInt16(sender.tag), color2: UInt16(sender.tag), color3: UInt16(sender.tag), transitionTime: TransitionTime(0.0), delay: 1), from: clientModel)
     }
     
     func setPublication(clientModel: Model, destinationAddress: MeshAddress?) {
