@@ -385,8 +385,8 @@ class AvairableExercisesViewController: UIViewController {
             ]
         ),
         Exercise(
-            title: "Counter attack",
-            description: "There are four goals on the pitch. The game direction changes in the modified amount of time. So two goals are enlightened in the same color.The teams stay the same.",
+            title: "Shotclock",
+            description: "",
             phases: [
                 Phase(
                     duration: 5,
@@ -453,8 +453,8 @@ class AvairableExercisesViewController: UIViewController {
                     ]
                    )
                 ]
-            )
-    ]
+            ),
+        ]
     
     // Initialization closures
     fileprivate lazy var exerciseCollectionView: UICollectionView = {
