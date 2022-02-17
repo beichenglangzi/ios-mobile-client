@@ -87,16 +87,16 @@ class ExerciseDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
         return label
     }()
     
-    fileprivate lazy var exerciseDescription: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = exercise.description
-        label.textAlignment = .center
-        label.textColor = .black
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.adjustsFontSizeToFitWidth = false
-        return label
+    fileprivate lazy var exerciseDescription: UITextView = {
+        let textview = UITextView()
+        textview.translatesAutoresizingMaskIntoConstraints = false
+        textview.text = exercise.description
+        textview.textColor = .black
+        textview.font = UIFont.systemFont(ofSize: 15)
+        textview.isScrollEnabled = true
+        textview.isEditable = false
+        textview.isSelectable = false
+        return textview
     }()
     
     fileprivate lazy var pitch: PitchView = {
@@ -523,8 +523,9 @@ class ExerciseDetailViewController: UIViewController, UIPickerViewDelegate, UIPi
         exerciseTitle.trailingAnchor.constraint(equalTo: descriptionContainerView.trailingAnchor).isActive = true
         
         exerciseDescription.topAnchor.constraint(equalTo: exerciseTitle.bottomAnchor, constant: marginWidth).isActive = true
-        exerciseDescription.leadingAnchor.constraint(equalTo: descriptionContainerView.leadingAnchor).isActive = true
-        exerciseDescription.trailingAnchor.constraint(equalTo: descriptionContainerView.trailingAnchor).isActive = true
+        exerciseDescription.leadingAnchor.constraint(equalTo: exerciseTitle.leadingAnchor, constant: marginWidth).isActive = true
+        exerciseDescription.trailingAnchor.constraint(equalTo: exerciseTitle.trailingAnchor, constant: -marginWidth).isActive = true
+        exerciseDescription.bottomAnchor.constraint(equalTo: descriptionContainerView.bottomAnchor, constant: -marginWidth).isActive = true
         
         pitch.topAnchor.constraint(equalTo: previewContainerView.topAnchor, constant: marginWidth).isActive = true
         pitch.leadingAnchor.constraint(equalTo: previewContainerView.leadingAnchor, constant: marginWidth).isActive = true
