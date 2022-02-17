@@ -1028,6 +1028,8 @@ class EditPitchView: UIView {
             switch goal.color {
                 case .pink:
                     UIColor.systemPink.setFill()
+                case .green:
+                    UIColor.green.setFill()
                 case .blue:
                     UIColor.systemBlue.setFill()
             }
@@ -1040,6 +1042,8 @@ class EditPitchView: UIView {
                     drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: verticalMarginToNearestHorizontalLine, width: goalWidth, height: goalHeight))
                 case .lowerRight:
                     drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: self.frame.height - verticalMarginToNearestHorizontalLine - goalHeight, width: goalWidth, height: goalHeight))
+            default:
+                break
             }
         }
         
@@ -1047,8 +1051,12 @@ class EditPitchView: UIView {
             switch player.color {
                 case .pink:
                     tintColor = .systemPink
+                case .green:
+                    tintColor = .green
                 case .blue:
                     tintColor = .systemBlue
+            default:
+                break
             }
             switch player.number {
                 case .player1:
@@ -1067,6 +1075,8 @@ class EditPitchView: UIView {
                     drawPlayer(rect: CGRect(x: self.frame.width*0.6, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor, playerButton: player7Button)
                 case .player8:
                     drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor, playerButton: player8Button)
+            default:
+                break
             }
         }
         drawCenterVerticalLine()
@@ -1078,6 +1088,8 @@ class EditPitchView: UIView {
                 switch goal.color {
                     case .pink:
                         UIColor.systemPink.setFill()
+                    case .green:
+                        UIColor.green.setFill()
                     case .blue:
                         UIColor.systemBlue.setFill()
                 }
@@ -1090,6 +1102,8 @@ class EditPitchView: UIView {
                         drawGoal(rect: CGRect(x: self.frame.width / 2 - goalHeight / 2, y: 1.8 * self.frame.height / 2 , width: goalHeight, height: goalWidth))
                     case .lowerRight:
                         drawGoal(rect: CGRect(x: self.frame.width / 2 + 0.8 * self.frame.size.height / 2, y: self.frame.height / 2 - goalHeight / 2, width: goalWidth, height: goalHeight))
+                default:
+                    break
                 }
             }
             
@@ -1097,8 +1111,12 @@ class EditPitchView: UIView {
                 switch player.color {
                     case .pink:
                         tintColor = .systemPink
+                    case .green:
+                        tintColor = .green
                     case .blue:
                         tintColor = .systemBlue
+                default:
+                    break
                 }
                 switch player.number {
                     case .player1:
