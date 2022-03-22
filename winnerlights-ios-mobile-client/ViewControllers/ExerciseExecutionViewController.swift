@@ -920,6 +920,103 @@ class PitchView: UIView {
             switch goal.color {
                 case .pink:
                     UIColor.systemPink.setFill()
+                    tintColor = .systemPink
+                case .green:
+                    UIColor.systemGreen.setFill()
+                    tintColor = .systemGreen
+                case .blue:
+                    UIColor.systemBlue.setFill()
+                    tintColor = .systemBlue
+            }
+            switch goal.position {
+                case .upperLeft:
+                    drawGoalIcon(rect: CGRect(x: -self.frame.width*0.1, y: verticalMarginToNearestHorizontalLine*0.9, width: self.frame.width*0.2, height: self.frame.width*0.2), color: tintColor)
+                case .lowerLeft:
+                    drawGoal(rect: CGRect(x: 0, y: self.frame.height - verticalMarginToNearestHorizontalLine - goalHeight, width: goalWidth, height: goalHeight))
+                case .upperRight:
+                    drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: verticalMarginToNearestHorizontalLine, width: goalWidth, height: goalHeight))
+                case .lowerRight:
+                    drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: self.frame.height - verticalMarginToNearestHorizontalLine - goalHeight, width: goalWidth, height: goalHeight))
+            default:
+                break
+            }
+        }
+        
+        for player in phase.players {
+            switch player.color {
+                case .pink:
+                    tintColor = .systemPink
+                case .green:
+                    tintColor = .systemGreen
+                case .blue:
+                    tintColor = .systemBlue
+                case .gray:
+                    tintColor = .systemGray
+            }
+            switch player.number {
+                case .player1:
+                    if tintColor == .systemGray {
+                        drawPlayer(rect: CGRect(x: 0, y: self.frame.height, width: self.frame.width*0.1, height: self.frame.width*0.1), color: tintColor)
+                    }else{
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.075, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                    }
+                case .player2:
+                    if tintColor == .systemGray {
+                        drawPlayer(rect: CGRect(x: 0, y: self.frame.height, width: self.frame.width*0.1, height: self.frame.width*0.1), color: tintColor)
+                    }else{
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.275, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                    }
+                case .player3:
+                    if tintColor == .systemGray {
+                        drawPlayer(rect: CGRect(x: 0, y: self.frame.height, width: self.frame.width*0.1, height: self.frame.width*0.1), color: tintColor)
+                    }else{
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.075, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                    }
+                case .player4:
+                    if tintColor == .systemGray {
+                        drawPlayer(rect: CGRect(x: 0, y: self.frame.height, width: self.frame.width*0.1, height: self.frame.width*0.1), color: tintColor)
+                    }else{
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.275, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                    }
+                case .player5:
+                    if tintColor == .systemGray {
+                        drawPlayer(rect: CGRect(x: self.frame.width - self.frame.width*0.1, y: self.frame.height, width: self.frame.width*0.1, height: self.frame.width*0.1), color: tintColor)
+                    }else{
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.6, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                    }
+                case .player6:
+                    if tintColor == .systemGray {
+                        drawPlayer(rect: CGRect(x: self.frame.width - self.frame.width*0.1, y: self.frame.height, width: self.frame.width*0.1, height: self.frame.width*0.1), color: tintColor)
+                    }else{
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                    }
+                case .player7:
+                    if tintColor == .systemGray {
+                        drawPlayer(rect: CGRect(x: self.frame.width - self.frame.width*0.1, y: self.frame.height, width: self.frame.width*0.1, height: self.frame.width*0.1), color: tintColor)
+                    }else{
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.6, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                    }
+                case .player8:
+                    if tintColor == .systemGray {
+                        drawPlayer(rect: CGRect(x: self.frame.width - self.frame.width*0.1, y: self.frame.height, width: self.frame.width*0.1, height: self.frame.width*0.1), color: tintColor)
+                    }else{
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                    }
+            default:
+                break
+            }
+        }
+        drawCenterVerticalLine()
+        drawCenterCircle()
+        }
+        
+        if phase.players.count == 7 {
+        for goal in phase.goals {
+            switch goal.color {
+                case .pink:
+                    UIColor.systemPink.setFill()
+                case .green:
+                    UIColor.systemGreen.setFill()
                 case .blue:
                     UIColor.systemBlue.setFill()
             }
@@ -932,6 +1029,8 @@ class PitchView: UIView {
                     drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: verticalMarginToNearestHorizontalLine, width: goalWidth, height: goalHeight))
                 case .lowerRight:
                     drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: self.frame.height - verticalMarginToNearestHorizontalLine - goalHeight, width: goalWidth, height: goalHeight))
+            default:
+                break
             }
         }
         
@@ -939,8 +1038,12 @@ class PitchView: UIView {
             switch player.color {
                 case .pink:
                     tintColor = .systemPink
+                case .green:
+                    tintColor = .systemGreen
                 case .blue:
                     tintColor = .systemBlue
+            default:
+                break
             }
             switch player.number {
                 case .player1:
@@ -956,9 +1059,165 @@ class PitchView: UIView {
                 case .player6:
                     drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
                 case .player7:
-                    drawPlayer(rect: CGRect(x: self.frame.width*0.6, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.7, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+            default:
+                break
+            }
+        }
+        drawCenterVerticalLine()
+        drawCenterCircle()
+        }
+        
+        if phase.players.count == 6 {
+        for goal in phase.goals {
+            switch goal.color {
+                case .pink:
+                    UIColor.systemPink.setFill()
+                case .green:
+                    UIColor.systemGreen.setFill()
+                case .blue:
+                    UIColor.systemBlue.setFill()
+            }
+            switch goal.position {
+                case .upperLeft:
+                    drawGoal(rect: CGRect(x: 0, y: verticalMarginToNearestHorizontalLine, width: goalWidth, height: goalHeight))
+                case .lowerLeft:
+                    drawGoal(rect: CGRect(x: 0, y: self.frame.height - verticalMarginToNearestHorizontalLine - goalHeight, width: goalWidth, height: goalHeight))
+                case .upperRight:
+                    drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: verticalMarginToNearestHorizontalLine, width: goalWidth, height: goalHeight))
+                case .lowerRight:
+                    drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: self.frame.height - verticalMarginToNearestHorizontalLine - goalHeight, width: goalWidth, height: goalHeight))
+            default:
+                break
+            }
+        }
+        
+        for player in phase.players {
+            switch player.color {
+                case .pink:
+                    tintColor = .systemPink
+                case .green:
+                    tintColor = .systemGreen
+                case .blue:
+                    tintColor = .systemBlue
+            default:
+                break
+            }
+            switch player.number {
+                case .player1:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.075, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                case .player2:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.275, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                case .player3:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.175, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                case .player4:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.6, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                case .player5:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.275, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                case .player6:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.7, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+            default:
+                break
+            }
+        }
+        drawTriangularCone(rect: CGRect(x: self.frame.width*0.150, y: -self.frame.height*0.075, width: self.frame.width*0.150, height: self.frame.width*0.150), color: .systemRed)
+        drawTriangularCone(rect: CGRect(x: self.frame.width*0.725, y: -self.frame.height*0.075, width: self.frame.width*0.150, height: self.frame.width*0.150), color: .systemBlue)
+        drawTriangularCone(rect: CGRect(x: self.frame.width*0.150, y: self.frame.height*0.850, width: self.frame.width*0.150, height: self.frame.width*0.150), color: .systemRed)
+        drawTriangularCone(rect: CGRect(x: self.frame.width*0.725, y: self.frame.height*0.850, width: self.frame.width*0.150, height: self.frame.width*0.150), color: .systemBlue)
+        drawCenterVerticalLine()
+        drawCenterCircle()
+        }
+        
+        if phase.players.count == 12 {
+        for goal in phase.goals {
+            switch goal.color {
+                case .pink:
+                    UIColor.systemPink.setFill()
+                case .green:
+                    UIColor.systemGreen.setFill()
+                case .blue:
+                    UIColor.systemBlue.setFill()
+            }
+            switch goal.position {
+                case .upperLeft:
+                    drawGoal(rect: CGRect(x: 0, y: verticalMarginToNearestHorizontalLine, width: goalWidth, height: goalHeight))
+                case .lowerLeft:
+                    drawGoal(rect: CGRect(x: 0, y: self.frame.height - verticalMarginToNearestHorizontalLine - goalHeight, width: goalWidth, height: goalHeight))
+                case .upperRight:
+                    drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: verticalMarginToNearestHorizontalLine, width: goalWidth, height: goalHeight))
+                case .lowerRight:
+                    drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: self.frame.height - verticalMarginToNearestHorizontalLine - goalHeight, width: goalWidth, height: goalHeight))
+            default:
+                break
+            }
+        }
+        
+        for player in phase.players {
+            switch player.color {
+                case .pink:
+                    tintColor = .systemPink
+                case .green:
+                    tintColor = .systemGreen
+                case .blue:
+                    tintColor = .systemBlue
+            default:
+                break
+            }
+            switch player.number {
+                case .player1:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.08, y: self.frame.height*0.15, width: self.frame.width*0.11, height: self.frame.width*0.11), color: tintColor)
+                case .player2:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.275, y: self.frame.height*0.15, width: self.frame.width*0.11, height: self.frame.width*0.11), color: tintColor)
+                case .player3:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.08, y: self.frame.height*0.4, width: self.frame.width*0.11, height: self.frame.width*0.11), color: tintColor)
+                case .player4:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.275, y: self.frame.height*0.4, width: self.frame.width*0.11, height: self.frame.width*0.11), color: tintColor)
+                case .player5:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.08, y: self.frame.height*0.65, width: self.frame.width*0.11, height: self.frame.width*0.11), color: tintColor)
+                case .player6:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.275, y: self.frame.height*0.65, width: self.frame.width*0.11, height: self.frame.width*0.11), color: tintColor)
+                case .player7:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.625, y: self.frame.height*0.15, width: self.frame.width*0.11, height: self.frame.width*0.11), color: tintColor)
                 case .player8:
-                    drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.6, width: self.frame.width*0.125, height: self.frame.width*0.125), color: tintColor)
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.15, width: self.frame.width*0.11, height: self.frame.width*0.11), color: tintColor)
+                case .player9:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.625, y: self.frame.height*0.4, width: self.frame.width*0.11, height: self.frame.width*0.11), color: tintColor)
+                case .player10:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.4, width: self.frame.width*0.11, height: self.frame.width*0.11), color: tintColor)
+                case .player11:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.625, y: self.frame.height*0.65, width: self.frame.width*0.11, height: self.frame.width*0.11), color: tintColor)
+                case .player12:
+                    drawPlayer(rect: CGRect(x: self.frame.width*0.8, y: self.frame.height*0.65, width: self.frame.width*0.11, height: self.frame.width*0.11), color: tintColor)
+            }
+        }
+        drawCenterVerticalLine()
+        drawCenterCircle()
+        }
+        
+        if phase.players.count == 2 {
+        for goal in phase.goals {
+            switch goal.color {
+                case .pink:
+                    tintColor = .systemPink
+                    UIColor.systemPink.setFill()
+                case .green:
+                    tintColor = .systemGreen
+                    UIColor.systemGreen.setFill()
+                case .blue:
+                    tintColor = .systemBlue
+                    UIColor.systemBlue.setFill()
+            }
+            switch goal.position {
+                case .upperLeft:
+                    drawGoal(rect: CGRect(x: 0, y: self.frame.height / 2 - goalHeight / 2, width: goalWidth, height: goalHeight))
+                case .upperRight:
+                    drawGoal(rect: CGRect(x: self.frame.width - goalWidth, y: self.frame.height / 2 - goalHeight / 2, width: goalWidth, height: goalHeight))
+                case .lowerLeft:
+                    drawPlayer(rect: CGRect(x: self.frame.width / 4 - self.frame.height*0.15 / 2, y: self.frame.height / 2 - self.frame.height*0.15 / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+                case .lowerRight:
+                    drawPlayer(rect: CGRect(x: self.frame.width * (3 / 4) - self.frame.height*0.15 / 2, y: self.frame.height / 2 - self.frame.height*0.15 / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+            default:
+                break
             }
         }
         drawCenterVerticalLine()
@@ -970,6 +1229,8 @@ class PitchView: UIView {
                 switch goal.color {
                     case .pink:
                         UIColor.systemPink.setFill()
+                    case .green:
+                        UIColor.systemGreen.setFill()
                     case .blue:
                         UIColor.systemBlue.setFill()
                 }
@@ -982,6 +1243,8 @@ class PitchView: UIView {
                         drawGoal(rect: CGRect(x: self.frame.width / 2 - goalHeight / 2, y: 1.8 * self.frame.height / 2 , width: goalHeight, height: goalWidth))
                     case .lowerRight:
                         drawGoal(rect: CGRect(x: self.frame.width / 2 + 0.8 * self.frame.size.height / 2, y: self.frame.height / 2 - goalHeight / 2, width: goalWidth, height: goalHeight))
+                default:
+                    break
                 }
             }
             
@@ -989,8 +1252,12 @@ class PitchView: UIView {
                 switch player.color {
                     case .pink:
                         tintColor = .systemPink
+                    case .green:
+                        tintColor = .systemGreen
                     case .blue:
                         tintColor = .systemBlue
+                default:
+                    break
                 }
                 switch player.number {
                     case .player1:
@@ -1009,7 +1276,95 @@ class PitchView: UIView {
             }
             drawCircle()
         }
+        
+        if phase.goals.count == 12 {
+            for goal in phase.goals {
+                switch goal.color {
+                    case .pink:
+                        UIColor.systemPink.setFill()
+                        tintColor = .systemPink
+                    case .green:
+                        UIColor.systemGreen.setFill()
+                        tintColor = .systemGreen
+                    case .blue:
+                        UIColor.systemBlue.setFill()
+                        tintColor = .systemBlue
+                }
+                switch goal.position {
+                    case .upperLeft:
+                        drawGoalIcon(rect: CGRect(x: (self.frame.width/13), y: (self.frame.height/10)*0.9, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+                    case .lowerLeft:
+                        drawGoal(rect: CGRect(x: (self.frame.width/10)*1.2, y: (self.frame.height/10)*2.9, width: goalWidth*0.6, height: goalHeight*0.6))
+                    case .upperRight:
+                        drawGoal(rect: CGRect(x: (self.frame.width/10)*4.8 - goalWidth*0.6, y: (self.frame.height/10)*0.9, width: goalWidth*0.6, height: goalHeight*0.6))
+                    case .lowerRight:
+                        drawGoal(rect: CGRect(x: (self.frame.width/10)*4.8 - goalWidth*0.6, y: (self.frame.height/10)*2.9, width: goalWidth*0.6, height: goalHeight*0.6))
+                    case .upperLeft2:
+                        drawGoal(rect: CGRect(x: (self.frame.width/10)*1.2, y: (self.frame.height/10)*5.9, width: goalWidth*0.6, height: goalHeight*0.6))
+                    case .lowerLeft2:
+                        drawGoal(rect: CGRect(x: (self.frame.width/10)*1.2, y: (self.frame.height/10)*7.9, width: goalWidth*0.6, height: goalHeight*0.6))
+                    case .upperRight2:
+                        drawGoal(rect: CGRect(x: (self.frame.width/10)*4.8 - goalWidth*0.6, y: (self.frame.height/10)*5.9, width: goalWidth*0.6, height: goalHeight*0.6))
+                    case .lowerRight2:
+                        drawGoal(rect: CGRect(x: (self.frame.width/10)*4.8 - goalWidth*0.6, y: (self.frame.height/10)*7.9, width: goalWidth*0.6, height: goalHeight*0.6))
+                    case .upperLeft3:
+                        drawGoal(rect: CGRect(x: (self.frame.width/10)*5.2, y: (self.frame.height/10)*3.4, width: goalWidth*0.6, height: goalHeight*0.6))
+                    case .lowerLeft3:
+                        drawGoal(rect: CGRect(x: (self.frame.width/10)*5.2, y: (self.frame.height/10)*5.4, width: goalWidth*0.6, height: goalHeight*0.6))
+                    case .upperRight3:
+                        drawGoal(rect: CGRect(x: (self.frame.width/10)*8.8 - goalWidth*0.6, y: (self.frame.height/10)*3.4, width: goalWidth*0.6, height: goalHeight*0.6))
+                    case .lowerRight3:
+                        drawGoal(rect: CGRect(x: (self.frame.width/10)*8.8 - goalWidth*0.6, y: (self.frame.height/10)*5.4, width: goalWidth*0.6, height: goalHeight*0.6))
+                default:
+                    break
+                }
+            }
+            
+            for player in phase.players {
+                switch player.color {
+                    case .pink:
+                        tintColor = .systemPink
+                    case .green:
+                        tintColor = .systemGreen
+                    case .blue:
+                        tintColor = .systemBlue
+                default:
+                    break
+                }
+                switch player.number {
+//                    case .player1:
+//                        drawPlayer(rect: CGRect(x: playerCenterX, y: playerCenterY, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+//                    case .player2:
+//                        drawPlayer(rect: CGRect(x: playerCenterX - 0.7 * self.frame.size.height / 2, y: playerCenterY - 0.7 * self.frame.size.height / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+//                    case .player3:
+//                        drawPlayer(rect: CGRect(x: playerCenterX - 0.7 * self.frame.size.height / 2, y: playerCenterY + 0.7 * self.frame.size.height / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+//                    case .player4:
+//                        drawPlayer(rect: CGRect(x: playerCenterX + 0.7 * self.frame.size.height / 2, y: playerCenterY - 0.7 * self.frame.size.height / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+//                    case .player5:
+//                        drawPlayer(rect: CGRect(x: playerCenterX + 0.7 * self.frame.size.height / 2, y: playerCenterY + 0.7 * self.frame.size.height / 2, width: self.frame.height*0.15, height: self.frame.height*0.15), color: tintColor)
+                default:
+                    break
+                }
+            }
+            drawFuninoRectangle1()
+            drawFuninoRectangle2()
+            drawFuninoRectangle3()
+            drawFuninoCenterCircle1()
+            drawFuninoCenterCircle2()
+            drawFuninoCenterCircle3()
+            drawFuninoCenterVerticalLine1()
+            drawFuninoCenterVerticalLine2()
+            drawFuninoCenterVerticalLine3()
+        }
     }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Ω touchesMoved")
+        guard let touch = touches.first, let view = touch.view else { return }
+                if view != self {
+                    view.center = touch.location(in: self)
+                }
+        }
 
     func drawGoal(rect: CGRect) {
         let goalRect = UIBezierPath(rect: rect)
@@ -1021,6 +1376,26 @@ class PitchView: UIView {
         imageview.frame = rect
         imageview.tintColor = color
         imageview.contentMode = UIView.ContentMode.scaleAspectFit
+        imageview.isUserInteractionEnabled = true
+        self.addSubview(imageview)
+    }
+    
+    func drawGoalIcon(rect: CGRect, color: UIColor) {
+        let imageview = UIImageView(image: UIImage(named: "Goal")?.withRenderingMode(.alwaysTemplate))
+        imageview.frame = rect
+        imageview.tintColor = color
+        imageview.contentMode = UIView.ContentMode.scaleAspectFit
+        imageview.isUserInteractionEnabled = true
+        imageview.transform = CGAffineTransform(rotationAngle: -.pi/2)
+        self.addSubview(imageview)
+    }
+    
+    func drawTriangularCone(rect: CGRect, color: UIColor) {
+        let imageview = UIImageView(image: UIImage(named: "TriangularCone")?.withRenderingMode(.alwaysTemplate))
+        imageview.frame = rect
+        imageview.tintColor = color
+        imageview.contentMode = UIView.ContentMode.scaleAspectFit
+        imageview.isUserInteractionEnabled = true
         self.addSubview(imageview)
     }
     
@@ -1033,8 +1408,86 @@ class PitchView: UIView {
         line.stroke()
     }
     
+    func drawFuninoRectangle1() {
+        let rectangle = UIBezierPath()
+        rectangle.move(to: CGPoint(x: (self.frame.width/10)*1.2, y: (self.frame.height/10)*0.5))
+        rectangle.addLine(to:CGPoint(x: (self.frame.width/10)*1.2, y: (self.frame.height/10)*4.5))
+        rectangle.addLine(to:CGPoint(x: (self.frame.width/10)*4.8, y: (self.frame.height/10)*4.5))
+        rectangle.addLine(to:CGPoint(x: (self.frame.width/10)*4.8, y: (self.frame.height/10)*0.5))
+        rectangle.close()
+        UIColor.black.setStroke()
+        rectangle.stroke()
+    }
+    
+    func drawFuninoRectangle2() {
+        let rectangle = UIBezierPath()
+        rectangle.move(to: CGPoint(x: (self.frame.width/10)*1.2, y: (self.frame.height/10)*5.5))
+        rectangle.addLine(to:CGPoint(x: (self.frame.width/10)*1.2, y: (self.frame.height/10)*9.5))
+        rectangle.addLine(to:CGPoint(x: (self.frame.width/10)*4.8, y: (self.frame.height/10)*9.5))
+        rectangle.addLine(to:CGPoint(x: (self.frame.width/10)*4.8, y: (self.frame.height/10)*5.5))
+        rectangle.close()
+        UIColor.black.setStroke()
+        rectangle.stroke()
+    }
+    
+    func drawFuninoRectangle3() {
+        let rectangle = UIBezierPath()
+        rectangle.move(to: CGPoint(x: (self.frame.width/10)*5.2, y: (self.frame.height/10)*3))
+        rectangle.addLine(to:CGPoint(x: (self.frame.width/10)*5.2, y: (self.frame.height/10)*7))
+        rectangle.addLine(to:CGPoint(x: (self.frame.width/10)*8.8, y: (self.frame.height/10)*7))
+        rectangle.addLine(to:CGPoint(x: (self.frame.width/10)*8.8, y: (self.frame.height/10)*3))
+        rectangle.close()
+        UIColor.black.setStroke()
+        rectangle.stroke()
+    }
+    
+    func drawFuninoCenterVerticalLine1() {
+        let line = UIBezierPath()
+        line.move(to: CGPoint(x: (self.frame.width/10)*3, y: (self.frame.height/10)*0.5))
+        line.addLine(to:CGPoint(x: (self.frame.width/10)*3, y: (self.frame.height/10)*4.5))
+        line.close()
+        UIColor.black.setStroke()
+        line.stroke()
+    }
+    
+    func drawFuninoCenterVerticalLine2() {
+        let line = UIBezierPath()
+        line.move(to: CGPoint(x: (self.frame.width/10)*3, y: (self.frame.height/10)*5.5))
+        line.addLine(to:CGPoint(x: (self.frame.width/10)*3, y: (self.frame.height/10)*9.5))
+        line.close()
+        UIColor.black.setStroke()
+        line.stroke()
+    }
+    
+    func drawFuninoCenterVerticalLine3() {
+        let line = UIBezierPath()
+        line.move(to: CGPoint(x: (self.frame.width/10)*7, y: (self.frame.height/10)*3))
+        line.addLine(to:CGPoint(x: (self.frame.width/10)*7, y: (self.frame.height/10)*7))
+        line.close()
+        UIColor.black.setStroke()
+        line.stroke()
+    }
+    
     func drawCenterCircle() {
         let centerCircle = UIBezierPath(arcCenter: CGPoint(x: self.frame.size.width / 2.0, y: self.frame.size.height / 2.0), radius: 0.3 * self.frame.size.height / 2, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
+        UIColor.black.setStroke()
+        centerCircle.stroke()
+    }
+    
+    func drawFuninoCenterCircle1() {
+        let centerCircle = UIBezierPath(arcCenter: CGPoint(x: (self.frame.width/10)*3, y: (self.frame.height/10)*2.5), radius: 0.1 * self.frame.size.height / 2, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
+        UIColor.black.setStroke()
+        centerCircle.stroke()
+    }
+    
+    func drawFuninoCenterCircle2() {
+        let centerCircle = UIBezierPath(arcCenter: CGPoint(x: (self.frame.width/10)*3, y: (self.frame.height/10)*7.5), radius: 0.1 * self.frame.size.height / 2, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
+        UIColor.black.setStroke()
+        centerCircle.stroke()
+    }
+    
+    func drawFuninoCenterCircle3() {
+        let centerCircle = UIBezierPath(arcCenter: CGPoint(x: (self.frame.width/10)*7, y: (self.frame.height/10)*5), radius: 0.1 * self.frame.size.height / 2, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
         UIColor.black.setStroke()
         centerCircle.stroke()
     }
@@ -1154,5 +1607,11 @@ extension ExerciseExecutionViewController: ModelControlDelegate {
         start(description) {
             return MeshNetworkManager.instance.publish(message, from: model)
         }
+    }
+}
+
+extension Array {
+    func safeRange(range: Range<Int>) -> ArraySlice<Element> {
+        return self.dropFirst(range.startIndex).prefix(range.endIndex)
     }
 }
