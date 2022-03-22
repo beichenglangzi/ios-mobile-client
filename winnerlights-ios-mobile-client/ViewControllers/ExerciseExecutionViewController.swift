@@ -31,14 +31,25 @@ enum GoalPosition: String, Codable {
     case lowerLeft
     case upperRight
     case lowerRight
+    case upperLeft2
+    case lowerLeft2
+    case upperRight2
+    case lowerRight2
+    case upperLeft3
+    case lowerLeft3
+    case upperRight3
+    case lowerRight3
 }
 enum GoalColor: String, Codable {
     case pink
     case blue
+    case green
 }
 enum PlayerColor: String, Codable {
     case pink
     case blue
+    case green
+    case gray
 }
 enum PlayerNumber: String, Codable {
     case player1
@@ -49,6 +60,10 @@ enum PlayerNumber: String, Codable {
     case player6
     case player7
     case player8
+    case player9
+    case player10
+    case player11
+    case player12
 }
 struct Phase: Codable {
     var duration: Float
@@ -92,41 +107,43 @@ class ExerciseExecutionViewController: ProgressViewController {
             if currentPhaseIndex != oldValue  {
                 let phase: Phase = exercise.phases[currentPhaseIndex]
                 
-                switch exercise.title {
-                case "Counter attack":
-                    switch currentPhaseIndex {
-                    case 0, 2:
-                        publishColorMessage(clientModel: clientModel, colorCode: 2)
-                    case 1, 3:
-                        publishColorMessage(clientModel: clientModel, colorCode: 3)
-                    default:
-                        break
-                    }
-                case "Diagonal":
-                    switch currentPhaseIndex {
-                    case 0:
-                        publishColorMessage(clientModel: clientModel, colorCode: 2)
-                    case 1, 3:
-                        publishColorMessage(clientModel: clientModel, colorCode: 4)
-                    case 2, 4:
-                        publishColorMessage(clientModel: clientModel, colorCode: 5)
-                    default:
-                        break
-                    }
-                case "Powerplay":
-                    switch currentPhaseIndex {
-                    case 0:
-                        publishColorMessage(clientModel: clientModel, colorCode: 2)
-                    case 1, 3:
-                        publishColorMessage(clientModel: clientModel, colorCode: 6)
-                    case 2, 4:
-                        publishColorMessage(clientModel: clientModel, colorCode: 7)
-                    default:
-                        break
-                    }
-                default:
-                    break
-                }
+                publishColorMessage(clientModel: clientModel, colorCode: allPhaseFourDigitColorCodeArray[currentPhaseIndex][0], colorCode2: allPhaseFourDigitColorCodeArray[currentPhaseIndex][1], colorCode3: allPhaseFourDigitColorCodeArray[currentPhaseIndex][2])
+                
+//                switch exercise.title {
+//                case "Counter attack":
+//                    switch currentPhaseIndex {
+//                    case 0, 2:
+//                        publishColorMessage(clientModel: clientModel, colorCode: 4422)
+//                    case 1, 3:
+//                        publishColorMessage(clientModel: clientModel, colorCode: 2244)
+//                    default:
+//                        break
+//                    }
+//                case "Diagonal":
+//                    switch currentPhaseIndex {
+//                    case 0:
+//                        publishColorMessage(clientModel: clientModel, colorCode: 4422)
+//                    case 1, 3:
+//                        publishColorMessage(clientModel: clientModel, colorCode: 4224)
+//                    case 2, 4:
+//                        publishColorMessage(clientModel: clientModel, colorCode: 2442)
+//                    default:
+//                        break
+//                    }
+//                case "Powerplay":
+//                    switch currentPhaseIndex {
+//                    case 0:
+//                        publishColorMessage(clientModel: clientModel, colorCode: 4422)
+//                    case 1, 3:
+//                        publishColorMessage(clientModel: clientModel, colorCode: 4444)
+//                    case 2, 4:
+//                        publishColorMessage(clientModel: clientModel, colorCode: 2222)
+//                    default:
+//                        break
+//                    }
+//                default:
+//                    break
+//                }
                 
                 j += phase.goals.count
                 k += phase.goals.count
@@ -173,22 +190,33 @@ class ExerciseExecutionViewController: ProgressViewController {
     var jobs: [Job]!
     var currentJobIndex: Int!
     var relations: [GoalNodeRelation] = []
+    var i: Int = 0
+    var l: Int = 0
+    var m: Int = 0
+    var n: Int = 0
+    var o: Float = 0
+    var p: Int = 0
+    var q: Int = 0
+    var fourDigitColorCode: UInt16 = 0
     
     var _jobs: [_Job]!
     var _currentJobIndex: Int!
     
     var nodes: [Node] = []
     var groups: [Group] = []
-    var color: [UInt8] = []
+    var colorCodeArray: [UInt8] = []
+    var eachPhaseFourDigitColorCodeArray: [UInt16] = []
+    var allPhaseFourDigitColorCodeArray: [[UInt16]] = []
+    var eachcolor: UInt16 = 0
     var applicationKey: ApplicationKey!
     private var newName: String!
     private var newKey: Data! = Data.random128BitKey()
     private var keyIndex: KeyIndex!
     private var newBoundNetworkKeyIndex: KeyIndex?
-    private var ttl: UInt8 = 0x7F
+    private var ttl: UInt8 = 0xFF
     private var periodSteps: UInt8 = 1
     private var periodResolution: StepResolution = .hundredsOfMilliseconds
-    private var retransmissionCount: UInt8 = 5
+    private var retransmissionCount: UInt8 = 4
     private var retransmissionIntervalSteps: UInt8 = 0
     weak var delegate: ProvisioningViewDelegate?
     var key: Key? {
@@ -437,9 +465,9 @@ class ExerciseExecutionViewController: ProgressViewController {
             .upperRight,
             .lowerRight
         ]
-        for (i, node) in nodes.filter({ !$0.isProvisioner }).enumerated() {
-            relations.append(GoalNodeRelation(position: positions[i], node: node))
-        }
+//        for (i, node) in nodes.filter({ !$0.isProvisioner }).enumerated() {
+//            relations.append(GoalNodeRelation(position: positions[i], node: node))
+//        }
         
         // Create 1 application key
         if network.applicationKeys.count == 0 {
@@ -459,32 +487,119 @@ class ExerciseExecutionViewController: ProgressViewController {
         }
         
         defer {
-            publishColorMessage(clientModel: clientModel, colorCode: 2)
+            publishColorMessage(clientModel: clientModel, colorCode: allPhaseFourDigitColorCodeArray[0][0], colorCode2: allPhaseFourDigitColorCodeArray[0][1], colorCode3: allPhaseFourDigitColorCodeArray[0][2])
         }
         
-        color = []
-        let phase: Phase = exercise.phases[0]
-        for goal in phase.goals {
-            let position: GoalPosition = goal.position
-            let filteredRelations = relations.filter{$0.position == position}
-            if filteredRelations.count != 0 {
-                let goalColor = goal.color
-                var colorCode: UInt8!
-                switch goalColor {
-                case .pink:
-                    colorCode = 2
-                    color.append(colorCode)
-                case .blue:
-                    colorCode = 4
-                    color.append(colorCode)
+        colorCodeArray = []
+        eachPhaseFourDigitColorCodeArray = []
+        for i in 0...exercise.phases.count-1 {
+        let phase: Phase = exercise.phases[i]
+            for goal in phase.goals {
+                let position: GoalPosition = goal.position
+                let filteredRelations = relations.filter{$0.position == position}
+    //            if filteredRelations.count != 0 {
+                    let goalColor = goal.color
+                    var colorCode: UInt8!
+                    switch goalColor {
+                    case .pink:
+                        colorCode = 2
+                        colorCodeArray.append(colorCode)
+                    case .green:
+                        colorCode = 3
+                        colorCodeArray.append(colorCode)
+                    case .blue:
+                        colorCode = 4
+                        colorCodeArray.append(colorCode)
+    //                }
                 }
             }
+            
+            for player in phase.players {
+                let playerColor = player.color
+                var colorCode: UInt8!
+                    switch playerColor {
+                    case .pink:
+                        colorCode = 2
+                        colorCodeArray.append(colorCode)
+                    case .green:
+                        colorCode = 3
+                        colorCodeArray.append(colorCode)
+                    case .blue:
+                        colorCode = 4
+                        colorCodeArray.append(colorCode)
+                    default:
+                        break
+                    }
+            }
+            print("Ω", colorCodeArray)
+            
+            if colorCodeArray.count % 4 == 0 {
+            while o < Float(colorCodeArray.count) / 4 {
+                for l in n...n+3 {
+                    eachcolor = UInt16(colorCodeArray[l])
+                    while m < p {
+                        eachcolor = eachcolor * 10
+                        m += 1
+                    }
+                    m = 0
+                    p += 1
+                    fourDigitColorCode += eachcolor
+                }
+                eachPhaseFourDigitColorCodeArray.append(fourDigitColorCode)
+                fourDigitColorCode = 0
+                p = 0
+                n += 4
+                o += 1
+            }
+            }else{
+                while q < colorCodeArray.count / 4 {
+                    for l in n...n+3 {
+                        eachcolor = UInt16(colorCodeArray[l])
+                        while m < p {
+                            eachcolor = eachcolor * 10
+                            m += 1
+                        }
+                        m = 0
+                        p += 1
+                        fourDigitColorCode += eachcolor
+                    }
+                    eachPhaseFourDigitColorCodeArray.append(fourDigitColorCode)
+                    fourDigitColorCode = 0
+                    p = 0
+                    n += 4
+                    q += 1
+                }
+                let slice3: ArraySlice<UInt8> = colorCodeArray[colorCodeArray.count - (colorCodeArray.count % 4) ..< colorCodeArray.count]
+                let slice4: [UInt8] = Array(slice3)
+                for l in 0...(colorCodeArray.count % 4) - 1 {
+                    eachcolor = UInt16(slice4[l])
+                    while m < p {
+                        eachcolor = eachcolor * 10
+                        m += 1
+                    }
+                    m = 0
+                    p += 1
+                    fourDigitColorCode += eachcolor
+                }
+                eachPhaseFourDigitColorCodeArray.append(fourDigitColorCode)
+                fourDigitColorCode = 0
+                p = 0
+            }
+            allPhaseFourDigitColorCodeArray.append(eachPhaseFourDigitColorCodeArray)
+            q = 0
+            n = 0
+            o = 0
+            eachPhaseFourDigitColorCodeArray = []
+            colorCodeArray = []
         }
+        print("Ω allPhaseFourDigitColorCodeArray", allPhaseFourDigitColorCodeArray)
         
         setPublication(clientModel: clientModel, destinationAddress: LEDGroupAddress)
         
         for node in nodes.filter({ !$0.isProvisioner }) {
-            setRelayEnable(serverNode: node)
+//            if node.features?.relay?.debugDescription == "Not Enabled" {
+//                setRelayEnable(serverNode: node)
+//            }
             print("≈ \(node.name) relay", node.features)
         }
         
@@ -630,8 +745,8 @@ class ExerciseExecutionViewController: ProgressViewController {
         }
     }
     
-    func publishColorMessage(clientModel: Model,colorCode: UInt16) {
-        _ = MeshNetworkManager.instance.publish(GenericOnOffSetUnacknowledged(colorCode, transitionTime: TransitionTime(0.0), delay: 0), from: clientModel)
+    func publishColorMessage(clientModel: Model,colorCode: UInt16, colorCode2: UInt16, colorCode3: UInt16) {
+        _ = MeshNetworkManager.instance.publish(GenericOnOffSetUnacknowledged(colorCode, color2: colorCode2, color3: colorCode3, transitionTime: TransitionTime(0.0), delay: 0), from: clientModel)
     }
     
     func setPublication(clientModel: Model, destinationAddress: MeshAddress?) {
@@ -653,7 +768,7 @@ class ExerciseExecutionViewController: ProgressViewController {
     
     func setRelayEnable(serverNode: Node) {
             let message: ConfigMessage =
-                ConfigRelaySet(count: 1, steps: 15)
+                ConfigRelaySet(count: 3, steps: 0)
             try! MeshNetworkManager.instance.send(message, to: serverNode)
         }
     
