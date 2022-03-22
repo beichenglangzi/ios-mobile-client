@@ -18,6 +18,283 @@ class AvairableExercisesViewController: UIViewController {
     let buttonHeight: CGFloat = 60
     var backButtonTappedAt: Float = 0
     var exercises: [Exercise] = [
+                Exercise(
+                title: "Funino",
+                description: "test.",
+                phases: [
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .pink),
+                            Goal(position: .lowerLeft, color: .pink),
+                            Goal(position: .upperRight, color: .green),
+                            Goal(position: .lowerRight, color: .green),
+                            Goal(position: .upperLeft2, color: .green),
+                            Goal(position: .lowerLeft2, color: .pink),
+                            Goal(position: .upperRight2, color: .pink),
+                            Goal(position: .lowerRight2, color: .green),
+                            Goal(position: .upperLeft3, color: .pink),
+                            Goal(position: .lowerLeft3, color: .pink),
+                            Goal(position: .upperRight3, color: .pink),
+                            Goal(position: .lowerRight3, color: .pink),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .pink),
+                            Player(number: .player2, color: .pink),
+                            Player(number: .player3, color: .pink),
+                        ]
+                    ),
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .green),
+                            Goal(position: .lowerLeft, color: .green),
+                            Goal(position: .upperRight, color: .pink),
+                            Goal(position: .lowerRight, color: .pink),
+                            Goal(position: .upperLeft2, color: .pink),
+                            Goal(position: .lowerLeft2, color: .green),
+                            Goal(position: .upperRight2, color: .green),
+                            Goal(position: .lowerRight2, color: .pink),
+                            Goal(position: .upperLeft3, color: .green),
+                            Goal(position: .lowerLeft3, color: .green),
+                            Goal(position: .upperRight3, color: .green),
+                            Goal(position: .lowerRight3, color: .green),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .pink),
+                            Player(number: .player2, color: .pink),
+                            Player(number: .player3, color: .pink),
+                        ]
+                    ),
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .pink),
+                            Goal(position: .lowerLeft, color: .pink),
+                            Goal(position: .upperRight, color: .green),
+                            Goal(position: .lowerRight, color: .green),
+                            Goal(position: .upperLeft2, color: .green),
+                            Goal(position: .lowerLeft2, color: .pink),
+                            Goal(position: .upperRight2, color: .pink),
+                            Goal(position: .lowerRight2, color: .green),
+                            Goal(position: .upperLeft3, color: .pink),
+                            Goal(position: .lowerLeft3, color: .pink),
+                            Goal(position: .upperRight3, color: .pink),
+                            Goal(position: .lowerRight3, color: .pink),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .pink),
+                            Player(number: .player2, color: .pink),
+                            Player(number: .player3, color: .pink),
+                        ]
+                    ),
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .green),
+                            Goal(position: .lowerLeft, color: .green),
+                            Goal(position: .upperRight, color: .pink),
+                            Goal(position: .lowerRight, color: .pink),
+                            Goal(position: .upperLeft2, color: .pink),
+                            Goal(position: .lowerLeft2, color: .green),
+                            Goal(position: .upperRight2, color: .green),
+                            Goal(position: .lowerRight2, color: .pink),
+                            Goal(position: .upperLeft3, color: .green),
+                            Goal(position: .lowerLeft3, color: .green),
+                            Goal(position: .upperRight3, color: .green),
+                            Goal(position: .lowerRight3, color: .green),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .pink),
+                            Player(number: .player2, color: .pink),
+                            Player(number: .player3, color: .pink),
+                        ]
+                    )
+                ]
+            ),
+                Exercise(
+                title: "Basic play",
+                description: "There are four goals on the pitch. Respectively two goals light in the same color. The game direction does not switch. The teams stay the same. Use this exercise to introduce and explain the technology.",
+                phases: [
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .pink),
+                            Goal(position: .lowerLeft, color: .pink),
+                            Goal(position: .upperRight, color: .blue),
+                            Goal(position: .lowerRight, color: .blue),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .pink),
+                            Player(number: .player2, color: .pink),
+                            Player(number: .player3, color: .pink),
+                            Player(number: .player4, color: .pink),
+                            Player(number: .player5, color: .blue),
+                            Player(number: .player6, color: .blue),
+                            Player(number: .player7, color: .blue),
+                            Player(number: .player8, color: .blue),
+                        ]
+                    ),
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .pink),
+                            Goal(position: .lowerLeft, color: .pink),
+                            Goal(position: .upperRight, color: .blue),
+                            Goal(position: .lowerRight, color: .blue),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .pink),
+                            Player(number: .player2, color: .pink),
+                            Player(number: .player3, color: .pink),
+                            Player(number: .player4, color: .pink),
+                            Player(number: .player5, color: .blue),
+                            Player(number: .player6, color: .blue),
+                            Player(number: .player7, color: .blue),
+                            Player(number: .player8, color: .blue),
+                        ]
+                    ),
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .pink),
+                            Goal(position: .lowerLeft, color: .pink),
+                            Goal(position: .upperRight, color: .blue),
+                            Goal(position: .lowerRight, color: .blue),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .pink),
+                            Player(number: .player2, color: .pink),
+                            Player(number: .player3, color: .pink),
+                            Player(number: .player4, color: .pink),
+                            Player(number: .player5, color: .blue),
+                            Player(number: .player6, color: .blue),
+                            Player(number: .player7, color: .blue),
+                            Player(number: .player8, color: .blue),
+                        ]
+                    ),
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .pink),
+                            Goal(position: .lowerLeft, color: .pink),
+                            Goal(position: .upperRight, color: .blue),
+                            Goal(position: .lowerRight, color: .blue),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .pink),
+                            Player(number: .player2, color: .pink),
+                            Player(number: .player3, color: .pink),
+                            Player(number: .player4, color: .pink),
+                            Player(number: .player5, color: .blue),
+                            Player(number: .player6, color: .blue),
+                            Player(number: .player7, color: .blue),
+                            Player(number: .player8, color: .blue),
+                        ]
+                    )
+                ]
+            ),
+                Exercise(
+                title: "Break player test",
+                description: "",
+                phases: [
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .pink),
+                            Goal(position: .lowerLeft, color: .pink),
+                            Goal(position: .upperRight, color: .blue),
+                            Goal(position: .lowerRight, color: .blue),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .pink),
+                            Player(number: .player2, color: .pink),
+                            Player(number: .player3, color: .pink),
+                            Player(number: .player4, color: .pink),
+                            Player(number: .player5, color: .blue),
+                            Player(number: .player6, color: .blue),
+                            Player(number: .player7, color: .blue),
+                            Player(number: .player8, color: .blue),
+                        ]
+                    ),
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .blue),
+                            Goal(position: .lowerLeft, color: .blue),
+                            Goal(position: .upperRight, color: .pink),
+                            Goal(position: .lowerRight, color: .pink),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .gray),
+                            Player(number: .player2, color: .pink),
+                            Player(number: .player3, color: .pink),
+                            Player(number: .player4, color: .pink),
+                            Player(number: .player5, color: .blue),
+                            Player(number: .player6, color: .blue),
+                            Player(number: .player7, color: .blue),
+                            Player(number: .player8, color: .blue),
+                        ]
+                    ),
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .pink),
+                            Goal(position: .lowerLeft, color: .pink),
+                            Goal(position: .upperRight, color: .blue),
+                            Goal(position: .lowerRight, color: .blue),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .pink),
+                            Player(number: .player2, color: .pink),
+                            Player(number: .player3, color: .pink),
+                            Player(number: .player4, color: .pink),
+                            Player(number: .player5, color: .gray),
+                            Player(number: .player6, color: .blue),
+                            Player(number: .player7, color: .blue),
+                            Player(number: .player8, color: .blue),
+                        ]
+                    ),
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .blue),
+                            Goal(position: .lowerLeft, color: .blue),
+                            Goal(position: .upperRight, color: .pink),
+                            Goal(position: .lowerRight, color: .pink),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .pink),
+                            Player(number: .player2, color: .gray),
+                            Player(number: .player3, color: .pink),
+                            Player(number: .player4, color: .pink),
+                            Player(number: .player5, color: .blue),
+                            Player(number: .player6, color: .blue),
+                            Player(number: .player7, color: .blue),
+                            Player(number: .player8, color: .blue),
+                        ]
+                    ),
+                    Phase(
+                        duration: 5,
+                        goals: [
+                            Goal(position: .upperLeft, color: .pink),
+                            Goal(position: .lowerLeft, color: .pink),
+                            Goal(position: .upperRight, color: .blue),
+                            Goal(position: .lowerRight, color: .blue),
+                        ],
+                        players: [
+                            Player(number: .player1, color: .pink),
+                            Player(number: .player2, color: .pink),
+                            Player(number: .player3, color: .pink),
+                            Player(number: .player4, color: .pink),
+                            Player(number: .player5, color: .blue),
+                            Player(number: .player6, color: .gray),
+                            Player(number: .player7, color: .blue),
+                            Player(number: .player8, color: .blue),
+                        ]
+                    )
+                ]
+            ),
             Exercise(
             title: "Counter attack",
             description: "There are four goals on the pitch. The game direction changes in the modified amount of time. So two goals are enlightened in the same color.The teams stay the same.",
@@ -27,25 +304,25 @@ class AvairableExercisesViewController: UIViewController {
                     goals: [
                         Goal(position: .upperLeft, color: .pink),
                         Goal(position: .lowerLeft, color: .pink),
-                        Goal(position: .upperRight, color: .blue),
-                        Goal(position: .lowerRight, color: .blue),
+                        Goal(position: .upperRight, color: .green),
+                        Goal(position: .lowerRight, color: .green),
                     ],
                     players: [
                         Player(number: .player1, color: .pink),
                         Player(number: .player2, color: .pink),
                         Player(number: .player3, color: .pink),
                         Player(number: .player4, color: .pink),
-                        Player(number: .player5, color: .blue),
-                        Player(number: .player6, color: .blue),
-                        Player(number: .player7, color: .blue),
-                        Player(number: .player8, color: .blue),
+                        Player(number: .player5, color: .green),
+                        Player(number: .player6, color: .green),
+                        Player(number: .player7, color: .green),
+                        Player(number: .player8, color: .green),
                     ]
                 ),
                 Phase(
                     duration: 5,
                     goals: [
-                        Goal(position: .upperLeft, color: .blue),
-                        Goal(position: .lowerLeft, color: .blue),
+                        Goal(position: .upperLeft, color: .green),
+                        Goal(position: .lowerLeft, color: .green),
                         Goal(position: .upperRight, color: .pink),
                         Goal(position: .lowerRight, color: .pink),
                     ],
@@ -54,10 +331,10 @@ class AvairableExercisesViewController: UIViewController {
                         Player(number: .player2, color: .pink),
                         Player(number: .player3, color: .pink),
                         Player(number: .player4, color: .pink),
-                        Player(number: .player5, color: .blue),
-                        Player(number: .player6, color: .blue),
-                        Player(number: .player7, color: .blue),
-                        Player(number: .player8, color: .blue),
+                        Player(number: .player5, color: .green),
+                        Player(number: .player6, color: .green),
+                        Player(number: .player7, color: .green),
+                        Player(number: .player8, color: .green),
                     ]
                 ),
                 Phase(
@@ -65,25 +342,25 @@ class AvairableExercisesViewController: UIViewController {
                     goals: [
                         Goal(position: .upperLeft, color: .pink),
                         Goal(position: .lowerLeft, color: .pink),
-                        Goal(position: .upperRight, color: .blue),
-                        Goal(position: .lowerRight, color: .blue),
+                        Goal(position: .upperRight, color: .green),
+                        Goal(position: .lowerRight, color: .green),
                     ],
                     players: [
                         Player(number: .player1, color: .pink),
                         Player(number: .player2, color: .pink),
                         Player(number: .player3, color: .pink),
                         Player(number: .player4, color: .pink),
-                        Player(number: .player5, color: .blue),
-                        Player(number: .player6, color: .blue),
-                        Player(number: .player7, color: .blue),
-                        Player(number: .player8, color: .blue),
+                        Player(number: .player5, color: .green),
+                        Player(number: .player6, color: .green),
+                        Player(number: .player7, color: .green),
+                        Player(number: .player8, color: .green),
                     ]
                 ),
                 Phase(
                     duration: 5,
                     goals: [
-                        Goal(position: .upperLeft, color: .blue),
-                        Goal(position: .lowerLeft, color: .blue),
+                        Goal(position: .upperLeft, color: .green),
+                        Goal(position: .lowerLeft, color: .green),
                         Goal(position: .upperRight, color: .pink),
                         Goal(position: .lowerRight, color: .pink),
                     ],
@@ -92,10 +369,10 @@ class AvairableExercisesViewController: UIViewController {
                         Player(number: .player2, color: .pink),
                         Player(number: .player3, color: .pink),
                         Player(number: .player4, color: .pink),
-                        Player(number: .player5, color: .blue),
-                        Player(number: .player6, color: .blue),
-                        Player(number: .player7, color: .blue),
-                        Player(number: .player8, color: .blue),
+                        Player(number: .player5, color: .green),
+                        Player(number: .player6, color: .green),
+                        Player(number: .player7, color: .green),
+                        Player(number: .player8, color: .green),
                     ]
                 )
             ]
@@ -303,8 +580,8 @@ class AvairableExercisesViewController: UIViewController {
         ]
       ),
         Exercise(
-            title: "Counter attack",
-            description: "There are four goals on the pitch. The game direction changes in the modified amount of time. So two goals are enlightened in the same color.The teams stay the same.",
+            title: "Basic play (Team switch)",
+            description: "There are four goals on the pitch. Respectively two goals light in the same colour. The game direction does not switch. The shirts are changing between the teams, so the players have to watch out with and against whom they have to play. Use this exercise to practise the team switch. The constant goals help the players to focus on the shirts first.",
             phases: [
                 Phase(
                     duration: 5,
@@ -328,10 +605,10 @@ class AvairableExercisesViewController: UIViewController {
                 Phase(
                     duration: 5,
                     goals: [
-                        Goal(position: .upperLeft, color: .blue),
-                        Goal(position: .lowerLeft, color: .blue),
-                        Goal(position: .upperRight, color: .pink),
-                        Goal(position: .lowerRight, color: .pink),
+                        Goal(position: .upperLeft, color: .pink),
+                        Goal(position: .lowerLeft, color: .pink),
+                        Goal(position: .upperRight, color: .blue),
+                        Goal(position: .lowerRight, color: .blue),
                     ],
                     players: [
                         Player(number: .player1, color: .blue),
@@ -366,10 +643,10 @@ class AvairableExercisesViewController: UIViewController {
                 Phase(
                     duration: 5,
                     goals: [
-                        Goal(position: .upperLeft, color: .blue),
-                        Goal(position: .lowerLeft, color: .blue),
-                        Goal(position: .upperRight, color: .pink),
-                        Goal(position: .lowerRight, color: .pink),
+                        Goal(position: .upperLeft, color: .pink),
+                        Goal(position: .lowerLeft, color: .pink),
+                        Goal(position: .upperRight, color: .blue),
+                        Goal(position: .lowerRight, color: .blue),
                     ],
                     players: [
                         Player(number: .player1, color: .blue),
@@ -384,6 +661,540 @@ class AvairableExercisesViewController: UIViewController {
                 )
             ]
         ),
+        Exercise(
+            title: "Counter attack (Team switch)",
+            description: "There are four goals on the pitch. The game direction changes in the modified amount of time. So two goals are enlightened in the same color.The teams stay the same.",
+            phases: [
+                Phase(
+                    duration: 5,
+                    goals: [
+                        Goal(position: .upperLeft, color: .pink),
+                        Goal(position: .lowerLeft, color: .pink),
+                        Goal(position: .upperRight, color: .green),
+                        Goal(position: .lowerRight, color: .green),
+                    ],
+                    players: [
+                        Player(number: .player1, color: .pink),
+                        Player(number: .player2, color: .pink),
+                        Player(number: .player3, color: .pink),
+                        Player(number: .player4, color: .pink),
+                        Player(number: .player5, color: .green),
+                        Player(number: .player6, color: .green),
+                        Player(number: .player7, color: .green),
+                        Player(number: .player8, color: .green),
+                    ]
+                ),
+                Phase(
+                    duration: 5,
+                    goals: [
+                        Goal(position: .upperLeft, color: .green),
+                        Goal(position: .lowerLeft, color: .green),
+                        Goal(position: .upperRight, color: .pink),
+                        Goal(position: .lowerRight, color: .pink),
+                    ],
+                    players: [
+                        Player(number: .player1, color: .green),
+                        Player(number: .player2, color: .green),
+                        Player(number: .player3, color: .green),
+                        Player(number: .player4, color: .green),
+                        Player(number: .player5, color: .pink),
+                        Player(number: .player6, color: .pink),
+                        Player(number: .player7, color: .pink),
+                        Player(number: .player8, color: .pink),
+                    ]
+                ),
+                Phase(
+                    duration: 5,
+                    goals: [
+                        Goal(position: .upperLeft, color: .pink),
+                        Goal(position: .lowerLeft, color: .pink),
+                        Goal(position: .upperRight, color: .green),
+                        Goal(position: .lowerRight, color: .green),
+                    ],
+                    players: [
+                        Player(number: .player1, color: .pink),
+                        Player(number: .player2, color: .pink),
+                        Player(number: .player3, color: .pink),
+                        Player(number: .player4, color: .pink),
+                        Player(number: .player5, color: .green),
+                        Player(number: .player6, color: .green),
+                        Player(number: .player7, color: .green),
+                        Player(number: .player8, color: .green),
+                    ]
+                ),
+                Phase(
+                    duration: 5,
+                    goals: [
+                        Goal(position: .upperLeft, color: .green),
+                        Goal(position: .lowerLeft, color: .green),
+                        Goal(position: .upperRight, color: .pink),
+                        Goal(position: .lowerRight, color: .pink),
+                    ],
+                    players: [
+                        Player(number: .player1, color: .green),
+                        Player(number: .player2, color: .green),
+                        Player(number: .player3, color: .green),
+                        Player(number: .player4, color: .green),
+                        Player(number: .player5, color: .pink),
+                        Player(number: .player6, color: .pink),
+                        Player(number: .player7, color: .pink),
+                        Player(number: .player8, color: .pink),
+                    ]
+                )
+            ]
+        ),
+        Exercise(
+        title: "Diagonal (Team switch)",
+        description: "There are four goals on the pitch. Respectively two goals are enlightened in the same colour. These goals diagonally have the same colour, so the attacking/ defending change has to be organised diagonally. The shirts are changing between the teams, so the players have to watch out with and against whom they have to play.",
+        phases: [
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .green),
+                    Goal(position: .lowerRight, color: .green),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .green),
+                    Player(number: .player6, color: .green),
+                    Player(number: .player7, color: .green),
+                    Player(number: .player8, color: .green),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .green),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .pink),
+                    Goal(position: .lowerRight, color: .green),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .green),
+                    Player(number: .player6, color: .green),
+                    Player(number: .player7, color: .green),
+                    Player(number: .player8, color: .green),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .green),
+                    Goal(position: .upperRight, color: .green),
+                    Goal(position: .lowerRight, color: .pink),
+                ],
+                players: [
+                    Player(number: .player1, color: .green),
+                    Player(number: .player2, color: .green),
+                    Player(number: .player3, color: .green),
+                    Player(number: .player4, color: .green),
+                    Player(number: .player5, color: .pink),
+                    Player(number: .player6, color: .pink),
+                    Player(number: .player7, color: .pink),
+                    Player(number: .player8, color: .pink),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .green),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .pink),
+                    Goal(position: .lowerRight, color: .green),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .green),
+                    Player(number: .player6, color: .green),
+                    Player(number: .player7, color: .green),
+                    Player(number: .player8, color: .green),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .green),
+                    Goal(position: .upperRight, color: .green),
+                    Goal(position: .lowerRight, color: .pink),
+                ],
+                players: [
+                    Player(number: .player1, color: .green),
+                    Player(number: .player2, color: .green),
+                    Player(number: .player3, color: .green),
+                    Player(number: .player4, color: .green),
+                    Player(number: .player5, color: .pink),
+                    Player(number: .player6, color: .pink),
+                    Player(number: .player7, color: .pink),
+                    Player(number: .player8, color: .pink),
+                ]
+            )
+          ]
+        ),
+        Exercise(
+        title: "Powerplay (Team switch)",
+        description: "All goals are alternately lighting in the same coulur. By that, one team has to defend all or attach all goals. The other team has to do the opposite. The shirts are changing between the teams, so the players have to watch out with and against whom they have to play.",
+        phases: [
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .blue),
+                    Goal(position: .lowerRight, color: .blue),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                    Player(number: .player7, color: .blue),
+                    Player(number: .player8, color: .blue),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .blue),
+                    Goal(position: .lowerLeft, color: .blue),
+                    Goal(position: .upperRight, color: .blue),
+                    Goal(position: .lowerRight, color: .blue),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                    Player(number: .player7, color: .blue),
+                    Player(number: .player8, color: .blue),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .pink),
+                    Goal(position: .lowerRight, color: .pink),
+                ],
+                players: [
+                    Player(number: .player1, color: .blue),
+                    Player(number: .player2, color: .blue),
+                    Player(number: .player3, color: .blue),
+                    Player(number: .player4, color: .blue),
+                    Player(number: .player5, color: .pink),
+                    Player(number: .player6, color: .pink),
+                    Player(number: .player7, color: .pink),
+                    Player(number: .player8, color: .pink),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .blue),
+                    Goal(position: .lowerLeft, color: .blue),
+                    Goal(position: .upperRight, color: .blue),
+                    Goal(position: .lowerRight, color: .blue),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                    Player(number: .player7, color: .blue),
+                    Player(number: .player8, color: .blue),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .pink),
+                    Goal(position: .lowerRight, color: .pink),
+                ],
+                players: [
+                    Player(number: .player1, color: .blue),
+                    Player(number: .player2, color: .blue),
+                    Player(number: .player3, color: .blue),
+                    Player(number: .player4, color: .blue),
+                    Player(number: .player5, color: .pink),
+                    Player(number: .player6, color: .pink),
+                    Player(number: .player7, color: .pink),
+                    Player(number: .player8, color: .pink),
+                ]
+            )
+        ]
+      ),
+        Exercise(
+        title: "Triangular Cone",
+        description: "",
+        phases: [
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .blue),
+                    Goal(position: .lowerRight, color: .blue),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .blue),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .blue),
+                    Goal(position: .lowerLeft, color: .blue),
+                    Goal(position: .upperRight, color: .pink),
+                    Goal(position: .lowerRight, color: .pink),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .blue),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .blue),
+                    Goal(position: .lowerRight, color: .blue),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .blue),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .blue),
+                    Goal(position: .lowerLeft, color: .blue),
+                    Goal(position: .upperRight, color: .pink),
+                    Goal(position: .lowerRight, color: .pink),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .blue),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                ]
+            )
+        ]
+    ),
+        Exercise(
+        title: "12 Player",
+        description: "",
+        phases: [
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .blue),
+                    Goal(position: .lowerRight, color: .blue),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .pink),
+                    Player(number: .player6, color: .pink),
+                    Player(number: .player7, color: .blue),
+                    Player(number: .player8, color: .blue),
+                    Player(number: .player9, color: .blue),
+                    Player(number: .player10, color: .blue),
+                    Player(number: .player11, color: .blue),
+                    Player(number: .player12, color: .blue),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .blue),
+                    Goal(position: .lowerLeft, color: .blue),
+                    Goal(position: .upperRight, color: .pink),
+                    Goal(position: .lowerRight, color: .pink),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .pink),
+                    Player(number: .player6, color: .pink),
+                    Player(number: .player7, color: .blue),
+                    Player(number: .player8, color: .blue),
+                    Player(number: .player9, color: .blue),
+                    Player(number: .player10, color: .blue),
+                    Player(number: .player11, color: .blue),
+                    Player(number: .player12, color: .blue),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .blue),
+                    Goal(position: .lowerRight, color: .blue),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .pink),
+                    Player(number: .player6, color: .pink),
+                    Player(number: .player7, color: .blue),
+                    Player(number: .player8, color: .blue),
+                    Player(number: .player9, color: .blue),
+                    Player(number: .player10, color: .blue),
+                    Player(number: .player11, color: .blue),
+                    Player(number: .player12, color: .blue),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .blue),
+                    Goal(position: .lowerLeft, color: .blue),
+                    Goal(position: .upperRight, color: .pink),
+                    Goal(position: .lowerRight, color: .pink),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .pink),
+                    Player(number: .player6, color: .pink),
+                    Player(number: .player7, color: .blue),
+                    Player(number: .player8, color: .blue),
+                    Player(number: .player9, color: .blue),
+                    Player(number: .player10, color: .blue),
+                    Player(number: .player11, color: .blue),
+                    Player(number: .player12, color: .blue),
+                ]
+            )
+        ]
+    ),
+        Exercise(
+        title: "7 Player",
+        description: "",
+        phases: [
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .blue),
+                    Goal(position: .lowerRight, color: .blue),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                    Player(number: .player7, color: .blue),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .blue),
+                    Goal(position: .lowerLeft, color: .blue),
+                    Goal(position: .upperRight, color: .pink),
+                    Goal(position: .lowerRight, color: .pink),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                    Player(number: .player7, color: .blue),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .pink),
+                    Goal(position: .lowerLeft, color: .pink),
+                    Goal(position: .upperRight, color: .blue),
+                    Goal(position: .lowerRight, color: .blue),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                    Player(number: .player7, color: .blue),
+                ]
+            ),
+            Phase(
+                duration: 5,
+                goals: [
+                    Goal(position: .upperLeft, color: .blue),
+                    Goal(position: .lowerLeft, color: .blue),
+                    Goal(position: .upperRight, color: .pink),
+                    Goal(position: .lowerRight, color: .pink),
+                ],
+                players: [
+                    Player(number: .player1, color: .pink),
+                    Player(number: .player2, color: .pink),
+                    Player(number: .player3, color: .pink),
+                    Player(number: .player4, color: .pink),
+                    Player(number: .player5, color: .blue),
+                    Player(number: .player6, color: .blue),
+                    Player(number: .player7, color: .blue),
+                ]
+            )
+        ]
+    ),
         Exercise(
             title: "Shotclock",
             description: "",
